@@ -35,8 +35,9 @@ jobs:
             [ "$dir" = "slides/*/" ] && continue
             name=$(basename "$dir")
             mkdir -p "_site/$name"
-            # Copy rendered HTML and all assets
+            # Copy rendered HTML, PDFs, and all assets
             cp -r "$dir"*.html "$dir"*_files "_site/$name/" 2>/dev/null || true
+            cp "$dir"*.pdf "_site/$name/" 2>/dev/null || true
             cp -r "$dir/assets" "_site/$name/assets" 2>/dev/null || true
           done
           cp slides/index.html _site/index.html 2>/dev/null || true
