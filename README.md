@@ -1,4 +1,6 @@
 # algorithm-engineering-material-ss2026
+To view the webpage version, which hosts only the slides and homework PDFs, visit
+[https://tubs-alg.github.io/algorithm-engineering-material-ss2026/](https://tubs-alg.github.io/algorithm-engineering-material-ss2026/).
 
 ## Weekly plan (updated 2026-03-30)
 
