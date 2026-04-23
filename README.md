@@ -8,8 +8,8 @@ To view the webpage version, which hosts only the slides and homework PDFs, visi
 |------|------|---------------------|----------|----------------------|---------|
 | 1 | Apr 9 | L01: Overview | Dominik | L02: CPU Arch 1 | Phillip |
 | 2 | Apr 16 | L03: CPU Arch 2 | Phillip | T01: Performance Engineering | Dominik |
-| 3 | Apr 23 | L04: Data Structures | | | |
-| 4 | Apr 30 | L05: Optimization Fundamentals | | T02: Declarative Modeling (CP) | |
+| 3 | Apr 23 | L04: Data Structures | Dominik | Exercise Discussion 1| Rouven |
+| 4 | Apr 30 | L05: Optimization Fundamentals | Phillip | T02: Declarative Modeling (CP) | Dominik |
 | 5 | May 7 | L06: TSP  | | | |
 | — | May 14 | *Christi Himmelfahrt* | — | — | — |
 | 6 | May 21 | L07: LP + MIP | | T03: LP/MIP Modeling | |
