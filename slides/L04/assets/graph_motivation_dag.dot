@@ -1,0 +1,47 @@
+digraph BuildGraph {
+
+graph [
+  bgcolor="transparent",
+  rankdir="LR",
+  pad="0.10",
+  nodesep="0.30",
+  ranksep="0.48",
+  dpi="200",
+  fontname="Helvetica"
+];
+node [
+  shape="box",
+  style="filled,rounded",
+  color="#e0e0e0",
+  fontcolor="white",
+  penwidth="1.2",
+  fontname="Helvetica-Bold",
+  fontsize="20",
+  margin="0.14,0.10"
+];
+edge [
+  color="#f39c12",
+  fontcolor="#f5c97b",
+  penwidth="1.8",
+  arrowsize="0.75",
+  fontsize="14",
+  fontname="Helvetica"
+];
+
+          label=<
+            <FONT POINT-SIZE="24"><B>DAG</B></FONT><BR/>
+            <FONT POINT-SIZE="14">build systems / task scheduling / prerequisites</FONT>
+          >;
+          labelloc="t";
+          labeljust="l";
+
+            b1 [label="lexer.o", fillcolor="#3a6b8c"];
+            b2 [label="parser.o", fillcolor="#3a6b8c"];
+            b3 [label="frontend.a", fillcolor="#4ea8de"];
+            b4 [label="app", fillcolor="#8e5ea2"];
+            { rank=same; b1; b2; b3; b4; }
+            b1 -> b3;
+            b2 -> b3;
+            b3 -> b4;
+
+        }

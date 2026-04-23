@@ -1,0 +1,48 @@
+digraph CitationGraph {
+
+graph [
+  bgcolor="transparent",
+  rankdir="LR",
+  pad="0.10",
+  nodesep="0.30",
+  ranksep="0.48",
+  dpi="200",
+  fontname="Helvetica"
+];
+node [
+  shape="box",
+  style="filled,rounded",
+  color="#e0e0e0",
+  fontcolor="white",
+  penwidth="1.2",
+  fontname="Helvetica-Bold",
+  fontsize="20",
+  margin="0.14,0.10"
+];
+edge [
+  color="#f39c12",
+  fontcolor="#f5c97b",
+  penwidth="1.8",
+  arrowsize="0.75",
+  fontsize="14",
+  fontname="Helvetica"
+];
+
+          label=<
+            <FONT POINT-SIZE="24"><B>Directed graph</B></FONT><BR/>
+            <FONT POINT-SIZE="14">citation / influence / hyperlinks</FONT>
+          >;
+          labelloc="t";
+          labeljust="l";
+
+            c1 [label="Transformer\n(2017)", fillcolor="#3a6b8c"];
+            c2 [label="BERT\n(2018)", fillcolor="#5a9e5a"];
+            c3 [label="GPT\n(2018)", fillcolor="#5a9e5a"];
+            c4 [label="Modern\nsurvey", fillcolor="#8e5ea2"];
+            { rank=same; c1; c2; c3; c4; }
+            c2 -> c1;
+            c3 -> c1;
+            c4 -> c2;
+            c4 -> c3;
+
+        }

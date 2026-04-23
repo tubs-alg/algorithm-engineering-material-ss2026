@@ -1,0 +1,38 @@
+# Wrap-up {background-image="assets/symbol_archive.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+The data structure is the performance story.
+
+## What we covered {.smaller}
+<div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 1.2em 1.2em; text-align: center;">
+  <div><div style="height: 5.5em; display: flex; align-items: center; justify-content: center;"><img src="assets/vector_layout.png" style="max-height: 100%; max-width: 100%; object-fit: contain;"></div><div style="font-weight: bold; margin-top: 0.4em;">Linear</div><div style="font-size: 0.75em; color: #777;">vector first, the rest rarely</div></div>
+  <div><div style="height: 5.5em; display: flex; align-items: center; justify-content: center;"><img src="assets/swiss_table.png" style="max-height: 100%; max-width: 100%; object-fit: contain;"></div><div style="font-weight: bold; margin-top: 0.4em;">Hash maps</div><div style="font-size: 0.75em; color: #777;">open addressing, not chaining</div></div>
+  <div><div style="height: 5.5em; display: flex; align-items: center; justify-content: center;"><img src="assets/tree_btree_demo.png" style="max-height: 100%; max-width: 100%; object-fit: contain;"></div><div style="font-weight: bold; margin-top: 0.4em;">Sorted</div><div style="font-size: 0.75em; color: #777;">B-tree over red-black</div></div>
+  <div><div style="height: 5.5em; display: flex; align-items: center; justify-content: center;"><img src="assets/binary_heap_array.png" style="max-height: 100%; max-width: 100%; object-fit: contain;"></div><div style="font-weight: bold; margin-top: 0.4em;">Priority queues</div><div style="font-size: 0.75em; color: #777;">implicit tree in an array</div></div>
+  <div><div style="height: 5.5em; display: flex; align-items: center; justify-content: center;"><img src="assets/union_find_tricks_step_11.png" style="max-height: 100%; max-width: 100%; object-fit: contain;"></div><div style="font-weight: bold; margin-top: 0.4em;">Union-find</div><div style="font-size: 0.75em; color: #777;">twenty lines, near-constant</div></div>
+  <div><div style="height: 5.5em; display: flex; align-items: center; justify-content: center;"><img src="assets/csr_memory.png" style="max-height: 100%; max-width: 100%; object-fit: contain;"></div><div style="font-weight: bold; margin-top: 0.4em;">Graphs</div><div style="font-size: 0.75em; color: #777;">CSR: two flat arrays</div></div>
+  <div><div style="height: 5.5em; display: flex; align-items: center; justify-content: center;"><img src="assets/bvh.png" style="max-height: 100%; max-width: 100%; object-fit: contain;"></div><div style="font-weight: bold; margin-top: 0.4em;">Spatial</div><div style="font-size: 0.75em; color: #777;">grids, kd-trees, BVH, R-trees</div></div>
+  <div><div style="height: 5.5em; display: flex; align-items: center; justify-content: center;"><img src="assets/bloom_filter_step_12.png" style="max-height: 100%; max-width: 100%; object-fit: contain;"></div><div style="font-weight: bold; margin-top: 0.4em;">Probabilistic</div><div style="font-size: 0.75em; color: #777;">accuracy for space</div></div>
+</div>
+
+## What we did *not* cover
+
+- **Strings:** suffix arrays, suffix trees, tries, FM-index. Their own world.
+- **Persistent / functional:** immutable structures, path copying, versioned data.
+- **Concurrent / lock-free:** hash maps, queues, trees under contention.
+- **External-memory:** real B-trees on disk, LSM trees (RocksDB, LevelDB).
+- **Succinct / compressed:** wavelet trees, RRR bit-vectors, rank/select.
+- **More sketches:** Cuckoo filter (deletable membership), t-digest (quantiles), MinHash (set similarity).
+- **GPU-oriented:** hash tables, BVHs, sort-based primitives on device memory.
+
+## Further reading
+
+::: {.platypus-book}
+- Mehlhorn & Sanders, *Algorithms and Data Structures: The Basic Toolbox* [@mehlhorn2008toolbox]
+- Wirth, *Algorithms + Data Structures = Programs* [@wirth1976algorithms]
+- Jiang, *Data Structures in Practice — A Hardware-Aware Approach* [@jiang2025dsinpractice]
+:::
+
+::: {.platypus-video}
+- Carruth, *Efficiency with Algorithms, Performance with Data Structures*, CppCon 2014 [@carruth2014]
+:::
+

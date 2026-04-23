@@ -1,0 +1,41 @@
+<!--
+What: Appendix — reference cheat sheet mapping each lecture topic to concrete
+C++ and Python options. Non-narrated: intended as a post-lecture lookup, not
+covered in the recorded walkthrough.
+Why: The lecture itself focuses on fundamentals (layout, cache behavior,
+trade-offs) rather than library coverage. Readers still benefit from a
+one-page map between concepts and the libraries they will actually reach for.
+How to use: render as the last content slide before the closer; skip during
+lecture delivery. No `.notes` block on purpose — TTS leaves this slide silent.
+When to change: update when a recommended library changes (e.g., a new flat
+hash map becomes the default pick) or when a topic is added/removed from the
+lecture body.
+-->
+
+# Appendix — Reference {background-image="assets/symbol_toolbox.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+For lookup after the lecture. Not covered in the recorded walkthrough.
+
+## C++ / Python cheat sheet {.smaller}
+
+| Topic | C++ | Python |
+|---|---|---|
+| Dynamic array | `std::vector` | `list`, `numpy.ndarray` |
+| Small / inline vector | `absl::InlinedVector`, `boost::small_vector`, `llvm::SmallVector` | — (fall back to `list`) |
+| Deque / FIFO | `std::vector` with read index | `collections.deque` |
+| Hash map (default) | `absl::flat_hash_map`, `ankerl::unordered_dense`, `boost::unordered_flat_map` | `dict` (already flat, open-addressed) |
+| Hash map (std) | `std::unordered_map` — chained, avoid when possible | — |
+| Sorted lookup (static) | sorted `std::vector` + `std::lower_bound` | `bisect` on a sorted `list` |
+| Sorted (mutation-heavy) | `absl::btree_map`, `absl::btree_set` | `sortedcontainers.SortedList` / `SortedDict` |
+| Sorted (std) | `std::map`, `std::set` — red-black tree, avoid | — |
+| Priority queue | `std::priority_queue`, `boost::d_ary_heap` | `heapq` on a `list` |
+| Union-find | 20-line inline implementation | `scipy.cluster.hierarchy.DisjointSet`, `networkx.utils.UnionFind` |
+| Graph (CSR) | hand-rolled CSR; GraphBLAS, Galois, Ligra | `scipy.sparse.csgraph`, `igraph`, `rustworkx` |
+| Graph (dict-of-dicts) | — (avoid) | `networkx` — fine below ~10⁵ edges |
+| Spatial (kd-tree, BVH, R-tree) | CGAL, nanoflann, Intel Embree, boost::geometry | `scipy.spatial.KDTree`, `scipy.spatial.cKDTree`, `rtree` |
+| Bloom filter | folly, RocksDB, Abseil | `pybloom-live`, `rbloom` |
+| Count-Min / HyperLogLog | `datasketches` (Apache) | `datasketches`, `probables` |
+
+: {.striped tbl-colwidths="[22,40,38]"}
+
+**Rule of thumb:** in Python, reach for a native-code library (NumPy, SciPy, Abseil-via-pybind11) before a pure-Python container when the workload is the bottleneck. In C++, reach for Abseil/Boost flat containers before the `std::` ordered or chained defaults.

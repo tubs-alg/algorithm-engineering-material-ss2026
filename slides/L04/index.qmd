@@ -1,0 +1,56 @@
+---
+title: "Fundamental Data Structures"
+subtitle: "Algorithm Engineering — L04"
+author: Dr. Dominik Krupke
+format:
+  revealjs:
+    slide-number: true
+    width: 1600
+    height: 900
+    chalkboard:
+      buttons: false
+    view-distance: 999
+    preview-links: auto
+    css: styles.css
+    footer: "Algorithm Engineering SS 2026 — L04 Data Structures"
+    progress: true
+    transition: none
+    background-transition: none
+    theme: dark
+    highlight-style: github
+    code-overflow: wrap
+bibliography: references.bib
+---
+
+# Welcome {background-image="assets/symbol_toolbox.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+<!-- Placeholder opener for TTS preview — to be replaced by a filmed intro. -->
+
+{{< include _02-linear.qmd >}}
+
+{{< include _03-hash-maps.qmd >}}
+
+{{< include _04-sorted.qmd >}}
+
+{{< include _05-priority-queues.qmd >}}
+
+{{< include _06-union-find.qmd >}}
+
+{{< include _07-graphs.qmd >}}
+
+{{< include _08-spatial.qmd >}}
+
+{{< include _10-probabilistic.qmd >}}
+
+{{< include _11-wrap-up.qmd >}}
+
+{{< include _12-appendix.qmd >}}
+
+# See you next time {background-image="assets/symbol_archive.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+<!-- Placeholder closer for TTS preview — to be replaced by a filmed outro. -->
+
+## References
+
+::: {#refs}
+:::

@@ -1,0 +1,4 @@
+# Fundamental Data Structures {background-image="assets/symbol_toolbox.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+Know your containers **empirically**, not just theoretically.
+
