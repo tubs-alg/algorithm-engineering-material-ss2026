@@ -48,6 +48,11 @@ jobs:
             mkdir -p "_site/$name"
             cp "$dir"*.pdf "_site/$name/" 2>/dev/null || true
           done
+          # Copy script PDFs
+          if [ -d scripts ]; then
+            mkdir -p _site/scripts
+            cp scripts/*.pdf _site/scripts/ 2>/dev/null || true
+          fi
           cp slides/index.html _site/index.html 2>/dev/null || true
 
       - uses: actions/upload-pages-artifact@v3
