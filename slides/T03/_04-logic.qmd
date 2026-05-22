@@ -1,0 +1,116 @@
+<!-- Sources for Encoding logic:
+     - Slides 17-19 of PLAN/08_SLIDE_SKELETON.md
+     - Beads 12-13 of PLAN/06_BEADS.md
+-->
+
+# Adding Logic {background-image="assets/symbol_logic.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+Big-M controlled by boolean logic allows expressing nearly anything.
+
+## At-most-one, exactly-one, implication
+
+::: {.columns}
+::: {.column width="48%"}
+**Counting**
+
+$$
+\sum_i b_i \le 1 \quad \text{at most one}
+$$
+
+::: {.fragment fragment-index=1}
+$$
+\sum_i b_i = 1 \quad \text{exactly one}
+$$
+:::
+
+::: {.fragment fragment-index=2}
+$$
+\sum_i b_i \ge 1 \quad \text{at least one}
+$$
+:::
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="48%"}
+::: {.fragment fragment-index=3}
+**Implication** $b_1 \Rightarrow b_2 \equiv b_1 \;\le\; b_2$.
+
+::: {.compact-table}
+| $b_1$ | $b_2$ | $b_1 \Rightarrow b_2$ | $b_1 \le b_2$ |
+|---:|---:|:---:| :---:|
+| $0$ | $0$ | ✓ | ✓ |
+| $0$ | $1$ | ✓ | ✓ |
+| $1$ | $0$ | ✗ | ✗ |
+| $1$ | $1$ | ✓ | ✓ |
+:::
+:::
+
+::: {.fragment fragment-index=4}
+**Negation:** $\;\lnot b \;\equiv\; (1 - b).$
+:::
+:::
+::::
+
+::: {.fragment fragment-index=5}
+::: {.platypus-tip}
+With **at least one** and **negation**, we can already enforce any Boolean function on binaries.
+However, if we want, e.g., to do $(b_1 \vee b_2) \Rightarrow c^\top x \le d$, we need the AND and OR bindings on the next two slides.
+:::
+:::
+
+## AND-Binding
+
+$$
+z = b_1 \land b_2 \quad\Longleftrightarrow\quad z \le b_1, \;\; z \le b_2, \;\; z \ge b_1 + b_2 - 1.
+$$
+
+::: {.compact-table}
+<table>
+<thead>
+<tr><th>$b_1$</th><th>$b_2$</th><th>$z$</th><th>$b_1 \land b_2$</th><th>$z \le b_1$</th><th>$z \le b_2$</th><th>$z \ge b_1+b_2-1$</th></tr>
+</thead>
+<tbody>
+<tr class="row-ok"><td>0</td><td>0</td><td>0</td><td>$= 0$</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr class="row-bad"><td>0</td><td>0</td><td>1</td><td>$\neq 0$</td><td>✗</td><td>✗</td><td>✓</td></tr>
+<tr class="row-ok"><td>0</td><td>1</td><td>0</td><td>$= 0$</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr class="row-bad"><td>0</td><td>1</td><td>1</td><td>$\neq 0$</td><td>✗</td><td>✓</td><td>✓</td></tr>
+<tr class="row-ok"><td>1</td><td>0</td><td>0</td><td>$= 0$</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr class="row-bad"><td>1</td><td>0</td><td>1</td><td>$\neq 0$</td><td>✓</td><td>✗</td><td>✓</td></tr>
+<tr class="row-bad"><td>1</td><td>1</td><td>0</td><td>$\neq 1$</td><td>✓</td><td>✓</td><td>✗</td></tr>
+<tr class="row-ok"><td>1</td><td>1</td><td>1</td><td>$= 1$</td><td>✓</td><td>✓</td><td>✓</td></tr>
+</tbody>
+</table>
+:::
+
+::: {.fragment .platypus-tip}
+**General $n$-ary form.** $z = \bigwedge_{i=1}^n b_i \;\Longleftrightarrow\; z \le b_i \;\;\forall i, \;\; z \ge \sum_{i=1}^n b_i - (n-1).$
+:::
+
+## OR-Binding
+
+$$
+z = b_1 \lor b_2 \quad\Longleftrightarrow\quad z \ge b_1, \;\; z \ge b_2, \;\; z \le b_1 + b_2.
+$$
+
+::: {.compact-table}
+<table>
+<thead>
+<tr><th>$b_1$</th><th>$b_2$</th><th>$z$</th><th>$b_1 \lor b_2$</th><th>$z \ge b_1$</th><th>$z \ge b_2$</th><th>$z \le b_1+b_2$</th></tr>
+</thead>
+<tbody>
+<tr class="row-ok"><td>0</td><td>0</td><td>0</td><td>$= 0$</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr class="row-bad"><td>0</td><td>0</td><td>1</td><td>$\neq 0$</td><td>✓</td><td>✓</td><td>✗</td></tr>
+<tr class="row-bad"><td>0</td><td>1</td><td>0</td><td>$\neq 1$</td><td>✓</td><td>✗</td><td>✓</td></tr>
+<tr class="row-ok"><td>0</td><td>1</td><td>1</td><td>$= 1$</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr class="row-bad"><td>1</td><td>0</td><td>0</td><td>$\neq 1$</td><td>✗</td><td>✓</td><td>✓</td></tr>
+<tr class="row-ok"><td>1</td><td>0</td><td>1</td><td>$= 1$</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr class="row-bad"><td>1</td><td>1</td><td>0</td><td>$\neq 1$</td><td>✗</td><td>✗</td><td>✓</td></tr>
+<tr class="row-ok"><td>1</td><td>1</td><td>1</td><td>$= 1$</td><td>✓</td><td>✓</td><td>✓</td></tr>
+</tbody>
+</table>
+:::
+
+::: {.fragment .platypus-tip}
+**General $n$-ary form.** $z = \bigvee_{i=1}^n b_i \;\Longleftrightarrow\; z \ge b_i \;\;\forall i, \;\; z \le \sum_{i=1}^n b_i.$
+:::
+

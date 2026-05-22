@@ -1,0 +1,207 @@
+.border {
+  border: 1px solid #dee2e6;
+}
+
+.smaller {
+  font-size: 0.85em;
+}
+
+.source-note {
+  font-size: 0.55em;
+  color: #999;
+  margin-top: 0.5em;
+}
+
+figcaption {
+  text-align: center !important;
+}
+
+.highlight-box {
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 3px solid #f39c12;
+  padding: 0.5em 0.8em;
+  margin-top: 0.5em;
+  border-radius: 4px;
+}
+
+.center-title h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+}
+
+.compact-table table {
+  font-size: 0.8em;
+}
+
+/* Row highlighting for truth tables that verify a Boolean encoding row by row.
+   Green rows are admitted by the inequalities; red rows are cut off. Used on
+   the AND / OR slides in `_04-logic.qmd`. */
+.compact-table tr.row-ok td { background: rgba(80, 160, 80, 0.22); }
+.compact-table tr.row-bad td { background: rgba(200, 70, 70, 0.20); }
+
+/* Platypus callout boxes — mirrors cpsat-primer style for RevealJS.
+   Usage: ::: {.platypus-tip} / .platypus-warning / .platypus-info / .platypus-question / .platypus-confucypus
+   The platypus appears on the left via ::before background-image. */
+/* Grid layout (not flex): every paragraph in the body would otherwise become
+   a separate flex item and render side-by-side. Grid pins the platypus image
+   to its column and lets content paragraphs stack as rows in the other column. */
+.platypus-tip,
+.platypus-warning,
+.platypus-info,
+.platypus-question,
+.platypus-confucypus,
+.platypus-book,
+.platypus-video,
+.callout-warning {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 0.3em;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 0.4em 0.8em;
+  margin: 0.5em 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.platypus-tip::before,
+.platypus-warning::before,
+.platypus-info::before,
+.platypus-question::before,
+.platypus-confucypus::before,
+.platypus-book::before,
+.platypus-video::before,
+.callout-warning::before {
+  content: "";
+  width: 120px;
+  height: 140px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  grid-column: 1;
+  grid-row: 1 / span 100;
+  align-self: center;
+}
+
+/* Book/Video variants: platypus on the right via ::after */
+.platypus-book,
+.platypus-video {
+  grid-template-columns: 1fr auto;
+}
+
+.platypus-book::after,
+.platypus-video::after {
+  grid-column: 2;
+  grid-row: 1 / span 100;
+  align-self: center;
+}
+
+.platypus-tip { background: rgba(80, 160, 80, 0.12); border-color: #5a9e5a; }
+.platypus-tip::before { background-image: url('assets/idea_platypus.webp'); }
+
+.platypus-warning,
+.callout-warning { background: rgba(200, 120, 40, 0.12); border-color: #c87828; }
+.platypus-warning::before,
+.callout-warning::before { background-image: url('assets/warning_platypus.webp'); }
+
+.callout-warning .callout-title { display: none; }
+
+.platypus-info { background: rgba(60, 140, 200, 0.12); border-color: #3c8cc8; }
+.platypus-info::before { background-image: url('assets/info_platypus.webp'); }
+
+.platypus-question { background: rgba(180, 140, 60, 0.12); border-color: #b48c3c; }
+.platypus-question::before { background-image: url('assets/platypus-thinking.png'); }
+
+.platypus-confucypus { background: rgba(140, 110, 80, 0.12); border-color: #8c6e50; font-style: italic; }
+.platypus-confucypus::before {
+  background-image: url('assets/confucypus.png');
+  width: 180px;
+  height: 210px;
+}
+
+.platypus-book { background: rgba(140, 100, 200, 0.12); border-color: #8c64c8; }
+.platypus-book::before { display: none; }
+.platypus-book::after {
+  content: "";
+  flex-shrink: 0;
+  width: 150px;
+  height: 180px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('assets/book_platypus.webp');
+}
+
+.platypus-video { background: rgba(200, 60, 80, 0.12); border-color: #c83c50; }
+.platypus-video::before { display: none; }
+.platypus-video::after {
+  content: "";
+  flex-shrink: 0;
+  width: 150px;
+  height: 180px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('assets/tv_platypus.webp');
+}
+
+/* Output / terminal output blocks — visually distinct from source code.
+   Quarto renders ```text as: pre.sourceCode.text > code.sourceCode
+   (language is a class on <pre>, not on <code>) */
+pre.sourceCode.text {
+  background: #0d1a26 !important;
+  border-left: 3px solid #4fc3f7;
+  border-radius: 4px;
+  position: relative;
+  padding-top: 1.6em !important;
+}
+
+pre.sourceCode.text::before {
+  content: "▶ output";
+  position: absolute;
+  top: 0.3em;
+  left: 0.8em;
+  font-size: 0.65em;
+  font-family: monospace;
+  color: #4fc3f7;
+  opacity: 0.75;
+  letter-spacing: 0.06em;
+}
+
+pre.sourceCode.text code {
+  color: #a8c8a0 !important;
+  background: transparent !important;
+}
+
+/* Slide-scoped code shrink — apply with `## Title {.smaller-code}` when a
+   side-by-side code comparison would otherwise overflow its column.
+   Theme default is .reveal pre { font-size: .55em }; this drops it ~10%. */
+.smaller-code pre.sourceCode {
+  font-size: 0.5em;
+}
+
+/* Centered red banner — for a slide-wide punchline that needs to land harder
+   than the standard orange platypus-warning (e.g. an NP-hardness twist on
+   what looked like a valid LP). Apply with `::: {.red-banner}`. */
+.red-banner {
+  background: rgba(200, 50, 50, 0.18);
+  border-left: 4px solid #d94545;
+  padding: 0.5em 0.9em;
+  margin-top: 0.6em;
+  text-align: center;
+  font-weight: 600;
+  color: #ffb0b0;
+  border-radius: 4px;
+}
+
+/* Instantaneous fragment swaps — used for step-by-step walkthroughs
+   (e.g. Bloom filter in action) where the fade distracts from the
+   visible state change. Apply with `.fragment.hard-swap`. */
+.reveal .fragment.hard-swap {
+  transition: none !important;
+}
