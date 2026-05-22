@@ -43,13 +43,13 @@ $$
 ::: {.column width="4%"}
 :::
 ::: {.column width="48%"}
-**Aggregated (capacity-style).**
+**Aggregated (big-M).**
 
 $$
 \begin{aligned}
 \min \;\; & \sum_j f_j\, y_j + \sum_{i,j} c_{ij}\, x_{ij} \\
 \text{s.t.} \;\; & \textstyle\sum_j x_{ij} = 1 \quad \forall i \\
-& \color{#e69138}{\textstyle\sum_i d_i\, x_{ij} \le C_j\, y_j \quad \forall j} \\
+& \color{#e69138}{\textstyle\sum_i x_{ij} \le n\, y_j \quad \forall j} \\
 & x_{ij}, y_j \in \{0,1\}
 \end{aligned}
 $$
@@ -69,14 +69,10 @@ $n\cdot m$ small inequalities → **tight LP relaxation.**
 ::: {.column width="48%"}
 ::: {.fragment fragment-index=2}
 ::: {.platypus-warning}
-$m$ dense inequalities, big-$C_j$ → **weak LP relaxation.**
+$m$ inequalities with big-$M = n$ → **weak LP relaxation.**
 :::
 :::
 :::
-:::
-
-::: {.fragment fragment-index=3}
-[OR-Library `cap101` (25 × 50): root LP gap **17.2 %** aggregated-only vs **0 %** with disaggregated added — same integer optimum $796{,}648.4$.]{.source-note}
 :::
 
 ## TSP subtour elimination: pick your poison
