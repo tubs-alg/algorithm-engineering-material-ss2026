@@ -1,0 +1,155 @@
+<!-- Sources for Speaking to the Solver:
+     - Bead 2 (MathOpt quickstart): PLAN/06_BEADS.md
+     - Slide originally lived in _00-intro.qmd; expanded to three slides.
+-->
+
+# Speaking to the solver {background-image="assets/symbol_mathopt.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+Once you know the basics, you can essentially use any LP/MIP solver you like.
+
+## Where to write the model
+
+:::: {.columns}
+
+::: {.column width="48%"}
+[**Solver-agnostic layers**]{style="color:#6aa84f;font-weight:bold"}
+
+- **MathOpt** (OR-Tools, Python)
+- **Pyomo** (Python)
+- **PuLP** (Python)
+- **JuMP** (Julia)
+- **AMPL**, **GAMS** (standalone)
+
+*Build once, swap backends.*
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+[**Vendor SDKs**]{style="color:#e06666;font-weight:bold"}
+
+- **gurobipy** (Gurobi)
+- **docplex** (CPLEX)
+- **xpress** (FICO Xpress)
+- **highspy** (HiGHS)
+- **pyscipopt** (SCIP)
+
+*Tied to one solver; richest access to vendor-specific features.*
+:::
+
+::::
+
+::: {.fragment}
+::: {.platypus-info}
+We will use **MathOpt** — free, Pythonic, and dispatches to GLOP, HiGHS, SCIP, CP-SAT, Gurobi, ... with a single argument. The patterns in this lecture transfer to any of the others.
+:::
+:::
+
+## MathOpt at a glance
+
+:::: {.columns}
+::: {.column width="50%"}
+Build the model
+```{.python code-line-numbers="|1-2|4-7|9-10|12-14|16|"}
+from ortools.math_opt.python import mathopt as mo
+model = mo.Model(name="...")
+# --- Variables ---
+x = model.add_variable(lb=0, name="x")
+y = [model.add_variable(lb=0, ub=100, is_integer=True)
+                                   for i in range(10)]
+b = model.add_binary_variable(name="b")
+# --- Expressions ---
+expr  = 3 * x + 2 * n - b
+total = sum(c[e] * y[e] for e in items)
+# --- Constraints ---
+model.add_linear_constraint(expr <= 5)
+model.add_linear_constraint(x + n == 7)
+model.add_linear_constraint(total >= 1)
+# --- Objective ---
+model.minimize(expr)
+```
+:::
+::: {.column width="50%"}
+Solve the model
+```{.python code-line-numbers="|2-6|7-10|13-15|"}
+# --- Solve ---
+from datetime import timedelta
+params = mo.SolveParameters(
+    enable_output=True,
+    time_limit=timedelta(seconds=30),
+)
+result = mo.solve(model, mo.SolverType.HIGHS,
+                     params=params)
+# SolverType.GLOP / .HIGHS / .GSCIP /
+# .CP_SAT / .GUROBI / ...
+
+# --- Read back ---
+result.termination.reason
+result.objective_value()
+result.variable_values()[x]
+```
+:::
+::::
+
+::: {.fragment}
+::: {.platypus-warning}
+MathOpt exposes some backend-specific features. Example: CP-SAT has no continuous variables — pass a continuous model to `SolverType.CP_SAT` and MathOpt raises before solving.
+:::
+:::
+
+## MathOpt vs vendor SDK {.smaller-code}
+
+:::: {.columns}
+
+::: {.column width="49%"}
+[**MathOpt (OR-Tools)**]{style="color:#6aa84f;font-weight:bold"}
+
+```{.python}
+from ortools.math_opt.python import mathopt as mo
+
+model = mo.Model("mincostflow")
+x = {e: model.add_variable(lb=0, ub=cap[e])
+     for e in edges}
+model.add_linear_constraint(x["sa"] == x["ab"] + x["at"])
+model.add_linear_constraint(x["sb"] + x["ab"] == x["bt"])
+model.add_linear_constraint(x["sa"] + x["sb"] >= demand)
+model.minimize(sum(cost[e] * x[e] for e in edges))
+
+result = mo.solve(model, mo.SolverType.GUROBI)
+# swap to GLOP / HIGHS / GSCIP / CP_SAT
+# — model unchanged
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+[**gurobipy (Gurobi native)**]{style="color:#e06666;font-weight:bold"}
+
+```{.python}
+import gurobipy as gp
+from gurobipy import GRB
+
+m = gp.Model("mincostflow")
+x = m.addVars(edges, lb=0, ub=cap)
+
+m.addConstr(x["sa"] == x["ab"] + x["at"])
+m.addConstr(x["sb"] + x["ab"] == x["bt"])
+m.addConstr(x["sa"] + x["sb"] >= demand)
+m.setObjective(gp.quicksum(cost[e] * x[e] for e in edges),
+               GRB.MINIMIZE)
+m.optimize()
+# locked to Gurobi — different vendor = rewrite
+```
+:::
+
+::::
+
+::: {.fragment}
+::: {.platypus-info}
+The shape is the same. The vocabulary differs. With a solver-agnostic layer the model description outlives the choice of solver; with a vendor SDK the two are coupled.
+:::
+:::
+

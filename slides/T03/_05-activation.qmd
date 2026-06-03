@@ -1,0 +1,58 @@
+<!-- Sources for Activation patterns:
+     - Slides 20-24 of PLAN/08_SLIDE_SKELETON.md
+     - Beads 14-17 of PLAN/06_BEADS.md
+     - Active elements on slides 23 and 24: PLAN/10_ACTIVE_ELEMENTS.md §10.4 and §10.5
+-->
+
+# Complex Domains {background-image="assets/symbol_activation.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+A binary $b$ activates a continuous $x$: either off (zero) or live (in a range).
+
+## Semi-Continuous Variables
+
+$x$ is either $0$ or lies in $[L, U]$ with $0 < L \le U$:
+
+$$
+x \in \{0\} \cup [L, U] \qquad\Longleftrightarrow\qquad L\, b \le x \le U\, b, \quad b \in \{0, 1\}.
+$$
+
+| $b$ | $L\, b \le x$ | $x \le U\, b$ | $x$           |
+|:---:|:-------------:|:-------------:|:-------------:|
+| $0$ | $0 \le x$     | $x \le 0$     | $= 0$         |
+| $1$ | $L \le x$     | $x \le U$     | $\in [L, U]$  |
+
+::: {.fragment .platypus-info}
+The same $b$ doubles as a fixed-charge switch: add $c\, b$ to the objective and you pay $c$ whenever $x \neq 0$.
+:::
+
+## Segmented Domains
+
+$x$ lies in one of several disjoint intervals:
+
+$$
+x \in [L_1, U_1] \cup [L_2, U_2] \cup [L_3, U_3].
+$$
+
+::: {.fragment fragment-index=1}
+::: {.platypus-warning}
+Reusing one shared $x$ with three semi-continuous blocks pins $x$ to zero — every off-block forces $x = 0$ simultaneously.
+:::
+:::
+
+::: {.fragment fragment-index=2}
+*Split* $x$ into one continuous part per interval; an exactly-one selector picks the live part:
+
+$$
+x = x_1 + x_2 + x_3, \quad L_k\, b_k \le x_k \le U_k\, b_k, \quad b_1 + b_2 + b_3 = 1.
+$$
+
+
+::: {.compact-table}
+| $(b_1, b_2, b_3)$ | $x_1$            | $x_2$            | $x_3$            | $x = \sum_k x_k$ |
+|:-----------------:|:----------------:|:----------------:|:----------------:|:----------------:|
+| $(1, 0, 0)$       | $\in [L_1, U_1]$ | $= 0$            | $= 0$            | $\in [L_1, U_1]$ |
+| $(0, 1, 0)$       | $= 0$            | $\in [L_2, U_2]$ | $= 0$            | $\in [L_2, U_2]$ |
+| $(0, 0, 1)$       | $= 0$            | $= 0$            | $\in [L_3, U_3]$ | $\in [L_3, U_3]$ |
+:::
+:::
+
