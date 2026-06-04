@@ -1,0 +1,23 @@
+<!--
+  _10-evaluation.qmd — Course evaluation slide.
+  WHAT: QR code + link to the EvaSys online survey for Algorithm Engineering.
+  WHEN: Informatik evaluation week SS 2026 (01.–07.06.2026).
+-->
+
+
+## Course Evaluation {.smaller}
+
+:::: {.columns}
+::: {.column width="50%"}
+![](assets/QRCode_9728N.png){width="70%" fig-align="center"}
+:::
+::: {.column width="50%"}
+**Please take 10–15 minutes to fill out the survey.**
+
+[https://umfragen.tu-bs.de/evasys/online.php?pswd=9728N](https://umfragen.tu-bs.de/evasys/online.php?pswd=9728N)
+
+- Evaluation week: **01.–07.06.2026**
+- Anonymous, via EvaSys
+:::
+::::
+

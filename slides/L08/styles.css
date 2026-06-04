@@ -1,0 +1,198 @@
+.border {
+  border: 1px solid #dee2e6;
+}
+
+/* "Cycle-free graphs" slide: pull the full-width platypus callout up under the
+   two figures. Each standalone image is wrapped in a .quarto-figure with a large
+   bottom margin, and reveal adds its own img block-margins; stacked, they leave a
+   ~70px gap before the following box (and pushed the box past the slide bottom).
+   Collapse just this slide's figure/image margins. Scoped by slide id so the
+   default figure spacing elsewhere is untouched. */
+#cycle-free-graphs .quarto-figure { margin: 0; }
+#cycle-free-graphs .column img { margin: 6px 0 0; }
+#cycle-free-graphs .platypus-info { margin-top: 0; }
+
+/* reveal.js's built-in .r-stack centers each stacked item via `margin: auto`,
+   which shrinks every item to its CONTENT width instead of the container width.
+   Inside a column that leaves a width:100% image rendering at its small intrinsic
+   size rather than filling the column. `.stack-fill` opts a specific stack into
+   filling its container: a definite 1fr track + full-width items so the inner
+   image's width:100% resolves against the column. Scoped so the other (full-width)
+   r-stacks in the deck are untouched. */
+.reveal .r-stack.stack-fill {
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+}
+.reveal .r-stack.stack-fill > * {
+  width: 100%;
+  margin: 0;
+}
+/* Slide canvas is 1600x900; cap the figure height so its bottom legend clears
+   the deck footer instead of overprinting it. */
+.reveal .r-stack.stack-fill img {
+  max-height: 680px;
+  object-fit: contain;
+}
+/* `.stack-fill.fill-slide` opts an individual stack out of the 680px cap so its
+   figure can take the full slide height (e.g. dense time-expanded diagrams that
+   need every pixel). The footer overlap risk is on the author to manage. */
+.reveal .r-stack.stack-fill.fill-slide img {
+  max-height: none;
+}
+
+/* Compact platypus callout for narrow side columns: smaller mascot + text so a
+   sentence-long note fits beside a large figure without overflowing the slide. */
+.platypus-info.compact,
+.platypus-tip.compact,
+.platypus-warning.compact {
+  font-size: 0.6em;
+  padding: 0.5em 0.7em;
+  column-gap: 0.6em;
+}
+.platypus-info.compact::before,
+.platypus-tip.compact::before,
+.platypus-warning.compact::before {
+  width: 48px;
+}
+
+.smaller {
+  font-size: 0.85em;
+}
+
+.source-note {
+  font-size: 0.55em;
+  color: #999;
+  margin-top: 0.5em;
+}
+
+figcaption {
+  text-align: center !important;
+}
+
+.highlight-box {
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 3px solid #f39c12;
+  padding: 0.5em 0.8em;
+  margin-top: 0.5em;
+  border-radius: 4px;
+}
+
+.center-title h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+}
+
+/* Platypus callout boxes — mirrors cpsat-primer style for RevealJS.
+   Usage: ::: {.platypus-tip} / .platypus-warning / .platypus-info / .platypus-question / .platypus-confucypus
+   The platypus appears on the left via ::before background-image. */
+/* Grid layout (not flex): every paragraph in the body would otherwise become
+   a separate flex item and render side-by-side. Grid pins the platypus image
+   to its column and lets content paragraphs stack as rows in the other column. */
+.platypus-tip,
+.platypus-warning,
+.platypus-info,
+.platypus-question,
+.platypus-confucypus,
+.platypus-book,
+.platypus-video,
+.callout-warning {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 1em;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 0.7em 1em;
+  margin: 0.5em 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.platypus-tip::before,
+.platypus-warning::before,
+.platypus-info::before,
+.platypus-question::before,
+.platypus-confucypus::before,
+.platypus-book::before,
+.platypus-video::before,
+.callout-warning::before {
+  content: "";
+  width: 90px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  grid-column: 1;
+  grid-row: 1 / span 100;
+  align-self: center;
+}
+
+/* Per-variant aspect ratios match each image's native proportions so
+   the reserved box hugs the platypus instead of padding it. */
+.platypus-tip::before { aspect-ratio: 433 / 746; }
+.platypus-warning::before,
+.callout-warning::before { aspect-ratio: 454 / 770; }
+.platypus-info::before { aspect-ratio: 427 / 420; }
+.platypus-question::before { aspect-ratio: 731 / 943; }
+.platypus-confucypus::before { aspect-ratio: 856 / 1066; }
+
+/* Book/Video variants: platypus on the right via ::after */
+.platypus-book,
+.platypus-video {
+  grid-template-columns: 1fr auto;
+}
+
+.platypus-book::after,
+.platypus-video::after {
+  grid-column: 2;
+  grid-row: 1 / span 100;
+  align-self: center;
+}
+
+.platypus-tip { background: rgba(80, 160, 80, 0.12); border-color: #5a9e5a; }
+.platypus-tip::before { background-image: url('assets/idea_platypus.webp'); }
+
+.platypus-warning,
+.callout-warning { background: rgba(200, 120, 40, 0.12); border-color: #c87828; }
+.platypus-warning::before,
+.callout-warning::before { background-image: url('assets/warning_platypus.webp'); }
+
+.callout-warning .callout-title { display: none; }
+
+.platypus-info { background: rgba(60, 140, 200, 0.12); border-color: #3c8cc8; }
+.platypus-info::before { background-image: url('assets/info_platypus.webp'); }
+
+.platypus-question { background: rgba(180, 140, 60, 0.12); border-color: #b48c3c; }
+.platypus-question::before { background-image: url('assets/platypus-thinking.png'); }
+
+.platypus-confucypus { background: rgba(140, 110, 80, 0.12); border-color: #8c6e50; font-style: italic; }
+.platypus-confucypus::before { background-image: url('assets/confucypus.png'); }
+
+.platypus-book { background: rgba(140, 100, 200, 0.12); border-color: #8c64c8; }
+.platypus-book::before { display: none; }
+.platypus-book::after {
+  content: "";
+  flex-shrink: 0;
+  width: 120px;
+  height: 240px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('assets/book_platypus.webp');
+}
+
+.platypus-video { background: rgba(200, 60, 80, 0.12); border-color: #c83c50; }
+.platypus-video::before { display: none; }
+.platypus-video::after {
+  content: "";
+  flex-shrink: 0;
+  width: 120px;
+  height: 240px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('assets/tv_platypus.webp');
+}

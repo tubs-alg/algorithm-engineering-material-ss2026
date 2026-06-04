@@ -1,0 +1,69 @@
+<!--
+  L08-graph-algorithms.qmd — main deck for "Graph & Network Algorithms".
+  WHAT: RevealJS frontmatter + filmed opener/closer placeholders + the
+        {{< include _NN-*.qmd >}} lines that assemble the section files.
+        Non-goal: slide content lives in the _NN-*.qmd files, not here.
+  WHY:  Mirrors the L01 deck layout so the build/TTS pipeline and styling
+        stay consistent across the course.
+  HOW:  Author each section in its _NN file; this file only orders them.
+  WHEN: Change when a section is added/removed/reordered, or deck metadata
+        (title, footer, theme) changes.
+
+  STRUCTURE (README.md, four pillars; min-cut folded into Flows):
+    _00 recap · _01 overview · SP: _02 framing / _03 algorithms / _04 engineering
+    · _05 matching · Flows: _06 maxflow+mincut / _07 mincost+residual
+    · _08 spanning-trees · _09 summary
+-->
+---
+title: "Graph & Network Algorithms"
+subtitle: "Algorithm Engineering — L08"
+author: Dr. Dominik Krupke
+format:
+  revealjs:
+    slide-number: true
+    width: 1600
+    height: 900
+    chalkboard:
+      buttons: false
+    preview-links: auto
+    css: styles.css
+    footer: "Algorithm Engineering SS 2026 — L08 Graph & Network Algorithms"
+    progress: true
+    transition: none
+    background-transition: none
+    theme: dark
+    highlight-style: github
+    code-overflow: wrap
+bibliography: references.bib
+---
+
+# Welcome {background-image="assets/symbol_l08.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+<!-- Placeholder opener for TTS preview — to be replaced by a filmed intro. -->
+
+{{< include _00-recap-graphs.qmd >}}
+
+{{< include _01-overview.qmd >}}
+
+{{< include _02-sp-framing.qmd >}}
+
+{{< include _03-sp-algorithms.qmd >}}
+
+{{< include _04-sp-engineering.qmd >}}
+
+{{< include _05-matching.qmd >}}
+
+{{< include _06-flows-maxflow-mincut.qmd >}}
+
+{{< include _07-flows-mincost-residual.qmd >}}
+
+{{< include _08-spanning-trees.qmd >}}
+
+{{< include _09-summary.qmd >}}
+
+{{< include _10-evaluation.qmd >}}
+
+# See you next lecture {background-image="assets/symbol_clockwork.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+<!-- Placeholder closer for TTS preview — to be replaced by a filmed outro. -->
+

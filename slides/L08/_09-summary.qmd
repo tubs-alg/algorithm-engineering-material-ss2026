@@ -1,0 +1,38 @@
+<!--
+  _09-summary.qmd — Plan item 7: summary.
+  WHAT: the lecture map (four pillars + the connections between them) and the
+        complexity recap (polynomial core vs. NP-hard variants).
+  ASSETS: assets/summary_map.svg + summary_complexity.svg.
+  NOTE: Christofides is omitted from the deck (per _08 decision); the summary
+        figures are regenerated WITHOUT the Christofides tile/band by the adapted
+        assets/sources/summary_solve.py. The NP-hard band instead names the deck's
+        actual NP-hard edges (RCSP budget, multi-commodity / activation-cost flows).
+  WHEN: change if the pillar set or the complexity recap changes.
+-->
+
+
+## Summary
+
+:::: {.columns  .smaller}
+::: {.column width="25%"}
+![](assets/glyph_shortest_path.svg){width="100%" fig-align="center"}
+
+Cheapest transitions.
+:::
+::: {.column width="25%"}
+![](assets/glyph_matching.svg){width="100%" fig-align="center"}
+Pairing/Assignment.
+:::
+::: {.column width="25%"}
+![](assets/glyph_flow.svg){width="100%" fig-align="center"}
+Balanced Production/Circulation/Consumption.
+:::
+::: {.column width="25%"}
+![](assets/glyph_mst.svg){width="100%" fig-align="center"}
+Cheapest Skeleton/Network.
+:::
+::::
+
+::: {.platypus-warning .fragment}
+While matching and flow algorithms often scale well in practice, they have a roughly cubic worst-case complexity, which for certain instances can become critical.
+:::

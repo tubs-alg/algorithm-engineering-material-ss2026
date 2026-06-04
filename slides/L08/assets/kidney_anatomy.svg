@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="483.12pt" height="279.520647pt" viewBox="0 0 483.12 279.520647" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-06-01T16:56:00.004172</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.9.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 279.520647 
+L 483.12 279.520647 
+L 483.12 0 
+L 0 0 
+L 0 279.520647 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 76.206 167.944001 
+L 120.474 167.944001 
+Q 130.89 167.944001 130.89 159.84494 
+L 130.89 142.634435 
+Q 130.89 134.535374 120.474 134.535374 
+L 76.206 134.535374 
+Q 65.79 134.535374 65.79 142.634435 
+L 65.79 159.84494 
+Q 65.79 167.944001 76.206 167.944001 
+z
+" clip-path="url(#p9dc8585ae1)" style="fill: #39526d; stroke: #9fb0c0; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 349.626 167.944001 
+L 393.894 167.944001 
+Q 404.31 167.944001 404.31 159.84494 
+L 404.31 142.634435 
+Q 404.31 134.535374 393.894 134.535374 
+L 349.626 134.535374 
+Q 339.21 134.535374 339.21 142.634435 
+L 339.21 159.84494 
+Q 339.21 167.944001 349.626 167.944001 
+z
+" clip-path="url(#p9dc8585ae1)" style="fill: #39526d; stroke: #9fb0c0; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 87.299542 156.525381 
+Q 235.04936 245.947207 380.312286 158.031271 
+" clip-path="url(#p9dc8585ae1)" style="fill: none; stroke: #7fbf7b; stroke-width: 2.6; stroke-linecap: round"/>
+    <path d="M 372.288575 158.679392 
+L 380.312286 158.031271 
+L 376.016557 164.839112 
+z
+" clip-path="url(#p9dc8585ae1)" style="fill: #7fbf7b; stroke: #7fbf7b; stroke-width: 2.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 343.715425 156.491035 
+Q 235.046957 220.985346 128.878233 157.971094 
+" clip-path="url(#p9dc8585ae1)" style="fill: none; stroke: #5aa86f; stroke-width: 2.6; stroke-linecap: round"/>
+    <path d="M 133.232353 164.74174 
+L 128.878233 157.971094 
+L 136.907221 158.550186 
+z
+" clip-path="url(#p9dc8585ae1)" style="fill: #5aa86f; stroke: #5aa86f; stroke-width: 2.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="fill: #e6e6e6; font: 700 10px 'DejaVu Sans'" transform="translate(230.860156 137.124219)">=</text>
+    <text style="fill: #e6e6e6; font: 700 10px 'DejaVu Sans'" transform="translate(224.664062 148.322031)">one</text>
+    <text style="fill: #e6e6e6; font: 700 10px 'DejaVu Sans'" transform="translate(208.7 159.519844)">matching</text>
+    <text style="fill: #e6e6e6; font: 700 10px 'DejaVu Sans'" transform="translate(221.109375 170.795781)">edge</text>
+   </g>
+   <g id="text_2">
+    <text style="fill: #e6e6e6; font: 11.5px 'DejaVu Sans'" transform="translate(61.402617 15.938203)">Anatomy of a 2-way swap: each node is a (donor, patient) pair</text>
+    <text style="fill: #e6e6e6; font: 11.5px 'DejaVu Sans'" transform="translate(38.217539 28.815687)">compatibility is directional -- a donor gives to the OTHER pair's patient</text>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m3c76e527a1" d="M 0 10.368221 
+C 2.749684 10.368221 5.387119 9.27576 7.331439 7.331439 
+C 9.27576 5.387119 10.368221 2.749684 10.368221 0 
+C 10.368221 -2.749684 9.27576 -5.387119 7.331439 -7.331439 
+C 5.387119 -9.27576 2.749684 -10.368221 0 -10.368221 
+C -2.749684 -10.368221 -5.387119 -9.27576 -7.331439 -7.331439 
+C -9.27576 -5.387119 -10.368221 -2.749684 -10.368221 0 
+C -10.368221 2.749684 -9.27576 5.387119 -7.331439 7.331439 
+C -5.387119 9.27576 -2.749684 10.368221 0 10.368221 
+z
+" style="stroke: #2b3a2b; stroke-width: 1.2"/>
+    </defs>
+    <g clip-path="url(#p9dc8585ae1)">
+     <use xlink:href="#m3c76e527a1" x="78.81" y="151.239687" style="fill: #7fbf7b; stroke: #2b3a2b; stroke-width: 1.2"/>
+    </g>
+   </g>
+   <g id="PathCollection_2">
+    <defs>
+     <path id="m37e4afce41" d="M 0 10.368221 
+C 2.749684 10.368221 5.387119 9.27576 7.331439 7.331439 
+C 9.27576 5.387119 10.368221 2.749684 10.368221 0 
+C 10.368221 -2.749684 9.27576 -5.387119 7.331439 -7.331439 
+C 5.387119 -9.27576 2.749684 -10.368221 0 -10.368221 
+C -2.749684 -10.368221 -5.387119 -9.27576 -7.331439 -7.331439 
+C -9.27576 -5.387119 -10.368221 -2.749684 -10.368221 0 
+C -10.368221 2.749684 -9.27576 5.387119 -7.331439 7.331439 
+C -5.387119 9.27576 -2.749684 10.368221 0 10.368221 
+z
+" style="stroke: #e69138; stroke-width: 2.6"/>
+    </defs>
+    <g clip-path="url(#p9dc8585ae1)">
+     <use xlink:href="#m37e4afce41" x="117.87" y="151.239687" style="fill: #ffffff; stroke: #e69138; stroke-width: 2.6"/>
+    </g>
+   </g>
+   <g id="PathCollection_3">
+    <g clip-path="url(#p9dc8585ae1)">
+     <use xlink:href="#m3c76e527a1" x="352.23" y="151.239687" style="fill: #7fbf7b; stroke: #2b3a2b; stroke-width: 1.2"/>
+    </g>
+   </g>
+   <g id="PathCollection_4">
+    <g clip-path="url(#p9dc8585ae1)">
+     <use xlink:href="#m37e4afce41" x="391.29" y="151.239687" style="fill: #ffffff; stroke: #e69138; stroke-width: 2.6"/>
+    </g>
+   </g>
+   <g id="text_3">
+    <text style="fill: #ffffff; font: 700 8.5px 'DejaVu Sans'; text-anchor: middle" x="78.81" y="153.585156" transform="rotate(-0 78.81 153.585156)">D</text>
+   </g>
+   <g id="text_4">
+    <text style="fill: #e69138; font: 700 8.5px 'DejaVu Sans'; text-anchor: middle" x="117.87" y="153.585156" transform="rotate(-0 117.87 153.585156)">R</text>
+   </g>
+   <g id="text_5">
+    <text style="fill: #ffffff; font: 700 8.5px 'DejaVu Sans'; text-anchor: middle" x="352.23" y="153.585156" transform="rotate(-0 352.23 153.585156)">D</text>
+   </g>
+   <g id="text_6">
+    <text style="fill: #e69138; font: 700 8.5px 'DejaVu Sans'; text-anchor: middle" x="391.29" y="153.585156" transform="rotate(-0 391.29 153.585156)">R</text>
+   </g>
+   <g id="legend_1">
+    <g id="patch_6">
+     <path d="M 99.893672 272.320647 
+L 383.226328 272.320647 
+Q 385.026328 272.320647 385.026328 270.520647 
+L 385.026328 258.210335 
+Q 385.026328 256.410335 383.226328 256.410335 
+L 99.893672 256.410335 
+Q 98.093672 256.410335 98.093672 258.210335 
+L 98.093672 270.520647 
+Q 98.093672 272.320647 99.893672 272.320647 
+z
+" style="fill: #1a2433; opacity: 0.8; stroke: #9aa6b5; stroke-linejoin: miter"/>
+    </g>
+    <g id="line2d_1">
+     <path d="M 101.693672 263.698929 
+L 110.693672 263.698929 
+L 119.693672 263.698929 
+" style="fill: none; stroke: #ffffff; stroke-width: 1.5; stroke-linecap: square"/>
+     <defs>
+      <path id="mc13df0afd0" d="M 0 6 
+C 1.591219 6 3.117479 5.367802 4.242641 4.242641 
+C 5.367802 3.117479 6 1.591219 6 0 
+C 6 -1.591219 5.367802 -3.117479 4.242641 -4.242641 
+C 3.117479 -5.367802 1.591219 -6 0 -6 
+C -1.591219 -6 -3.117479 -5.367802 -4.242641 -4.242641 
+C -5.367802 -3.117479 -6 -1.591219 -6 0 
+C -6 1.591219 -5.367802 3.117479 -4.242641 4.242641 
+C -3.117479 5.367802 -1.591219 6 0 6 
+z
+" style="stroke: #2b3a2b"/>
+     </defs>
+     <g>
+      <use xlink:href="#mc13df0afd0" x="110.693672" y="263.698929" style="fill: #7fbf7b; stroke: #2b3a2b"/>
+     </g>
+    </g>
+    <g id="text_7">
+     <text style="fill: #e6e6e6; font: 9px 'DejaVu Sans'; text-anchor: start" x="126.893672" y="266.848929" transform="rotate(-0 126.893672 266.848929)">donor (gives a kidney)</text>
+    </g>
+    <g id="line2d_2">
+     <path d="M 245.904609 263.698929 
+L 254.904609 263.698929 
+L 263.904609 263.698929 
+" style="fill: none; stroke: #ffffff; stroke-width: 1.5; stroke-linecap: square"/>
+     <defs>
+      <path id="m6f9952c8f4" d="M 0 6 
+C 1.591219 6 3.117479 5.367802 4.242641 4.242641 
+C 5.367802 3.117479 6 1.591219 6 0 
+C 6 -1.591219 5.367802 -3.117479 4.242641 -4.242641 
+C 3.117479 -5.367802 1.591219 -6 0 -6 
+C -1.591219 -6 -3.117479 -5.367802 -4.242641 -4.242641 
+C -5.367802 -3.117479 -6 -1.591219 -6 0 
+C -6 1.591219 -5.367802 3.117479 -4.242641 4.242641 
+C -3.117479 5.367802 -1.591219 6 0 6 
+z
+" style="stroke: #e69138; stroke-width: 2.4"/>
+     </defs>
+     <g>
+      <use xlink:href="#m6f9952c8f4" x="254.904609" y="263.698929" style="fill: #ffffff; stroke: #e69138; stroke-width: 2.4"/>
+     </g>
+    </g>
+    <g id="text_8">
+     <text style="fill: #e6e6e6; font: 9px 'DejaVu Sans'; text-anchor: start" x="271.104609" y="266.848929" transform="rotate(-0 271.104609 266.848929)">patient (needs a kidney)</text>
+    </g>
+   </g>
+   <g id="text_9">
+    <text style="fill: #e6e6e6; font: 700 10.5px 'DejaVu Sans'; text-anchor: middle" x="98.34" y="125.265024" transform="rotate(-0 98.34 125.265024)">A</text>
+   </g>
+   <g id="text_10">
+    <text style="fill: #e6e6e6; font: 700 10.5px 'DejaVu Sans'; text-anchor: middle" x="371.76" y="125.265024" transform="rotate(-0 371.76 125.265024)">B</text>
+   </g>
+   <g id="text_11">
+    <g id="patch_7">
+     <path d="M 174.207031 109.990576 
+L 295.892969 109.990576 
+Q 297.892969 109.990576 297.892969 107.990576 
+L 297.892969 98.312451 
+Q 297.892969 96.312451 295.892969 96.312451 
+L 174.207031 96.312451 
+Q 172.207031 96.312451 172.207031 98.312451 
+L 172.207031 107.990576 
+Q 172.207031 109.990576 174.207031 109.990576 
+z
+" style="fill: #1a2433; fill-opacity: 0.85"/>
+    </g>
+    <text style="fill: #7fbf7b; font: 10px 'DejaVu Sans'; text-anchor: middle" x="235.05" y="105.910889" transform="rotate(-0 235.05 105.910889)">A's donor  →  B's patient</text>
+   </g>
+   <g id="text_12">
+    <g id="patch_8">
+     <path d="M 174.207031 206.166924 
+L 295.892969 206.166924 
+Q 297.892969 206.166924 297.892969 204.166924 
+L 297.892969 194.488799 
+Q 297.892969 192.488799 295.892969 192.488799 
+L 174.207031 192.488799 
+Q 172.207031 192.488799 172.207031 194.488799 
+L 172.207031 204.166924 
+Q 172.207031 206.166924 174.207031 206.166924 
+z
+" style="fill: #1a2433; fill-opacity: 0.85"/>
+    </g>
+    <text style="fill: #5aa86f; font: 10px 'DejaVu Sans'; text-anchor: middle" x="235.05" y="202.087236" transform="rotate(-0 235.05 202.087236)">B's donor  →  A's patient</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p9dc8585ae1">
+   <rect x="7.2" y="34.815687" width="468.72" height="232.848"/>
+  </clipPath>
+ </defs>
+</svg>
