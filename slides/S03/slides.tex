@@ -589,7 +589,7 @@ def _capacity_link_constraints(self):
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,t]{Circuit Constraints (MTZ - Bad!)}
+\begin{frame}[fragile,t]{Circuit Constraints (MTZ - Bad)}
 \begin{minted}[highlightlines={10,6}]{python}
 def _circular_constraint_mtz(self):
 	self.order_vars = {n: self.model.new_int_var(
@@ -604,8 +604,8 @@ def _circular_constraint_mtz(self):
 	# + one incoming + one outgoing for every node
 \end{minted}
 \begin{itemize}
-	\item horrible relaxations in the tour constraint!
 	\item MTZ has a very large (relaxed) polytope
+	\item sometimes good with capacity constraints, order numbers, ...
 \end{itemize}
 \end{frame}
 
@@ -633,14 +633,16 @@ def _circular_constraint(self):
 \begin{frame}[t]{MTZ vs \texttt{add\_circuit} (greedy warm-start)}
 	\begin{center}
 		\includegraphics[keepaspectratio, scale=0.6]{3_2.pdf}
-		a good heuristic can save a bad model from finding no solution, but cannot make a bad model good
+		
+		a good heuristic can save a bad model, but cannot make a bad model good
 	\end{center}
 \end{frame}
 
 \begin{frame}[t]{MTZ vs \texttt{add\_circuit} (specialized heuristic warm-start)}
 	\begin{center}
 		\includegraphics[keepaspectratio, scale=0.6]{3_3.pdf}
-		a good heuristic can save a bad model from finding no solution, but cannot make a bad model good
+		
+		a good heuristic can save a bad model, but cannot make a bad model good 
 	\end{center}
 \end{frame}
 
