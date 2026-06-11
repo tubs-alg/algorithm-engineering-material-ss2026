@@ -1,0 +1,54 @@
+# Recap {background-image="assets/symbol_gear.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+Three families, each a deep catalog of variants and constraints.
+
+## JSSP, Rostering, VRP {.smaller}
+
+:::: {.columns}
+::: {.column width="33%"}
+![](assets/intro_jsp.png){width="72%" fig-align="left"}
+
+**Shop scheduling**
+
+- Flexible job shop
+- Flow / hybrid / open shop
+- Project scheduling (RCPSP)
+- Multi-mode, consumables
+- Sequence-dependent setups
+- No-wait / blocking
+- Resource breaks, time windows
+
+*PyJobShop · CP-SAT*
+:::
+::: {.column width="33%"}
+![](assets/intro_roster.png){width="72%" fig-align="left"}
+
+**Rostering**
+
+- Coverage requirements
+- Skills & availability
+- Rest periods, weekends
+- Contracts, working hours
+- Fairness & balance
+- Preferences
+- Patterns, pairing, replanning
+
+*Timefold · SolverForge*
+:::
+::: {.column width="33%"}
+![](assets/intro_vrp.png){width="72%" fig-align="left"}
+
+**Vehicle routing**
+
+- Capacity (CVRP)
+- Pickups & deliveries
+- Time windows (VRPTW)
+- Driver shifts, HOS breaks
+- Multiple depots, mixed fleet
+- Reloading / multi-trip
+- Prize collection, client groups
+
+*PyVRP · OR-Tools*
+:::
+::::
+
