@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "queens"
+version = "0.1.0"
+description = "Teaching scaffold for solving the N-queens problem with a SAT solver (PySAT) and a CP solver (OR-Tools)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Phillip Keldenich" },
+  { name = "Dominik Krupke" },
+]
+dependencies = [
+  "python-sat>=1.9.dev5",
+  "ortools>=9.14.6206",
+  "pytest"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=9.0",
+  "ruff>=0.11",
+]
+
+[project.scripts]
+queens-sat = "queens.cli:sat_main"
+queens-cpsat = "queens.cli:cpsat_main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/queens"]
+
+[tool.pytest]
+minversion = "9.0"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
