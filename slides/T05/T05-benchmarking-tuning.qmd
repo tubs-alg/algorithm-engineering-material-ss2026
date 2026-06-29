@@ -1,0 +1,47 @@
+---
+title: "Benchmarking & Parameter Tuning"
+subtitle: "Algorithm Engineering — T05"
+author: Dr. Dominik Krupke
+format:
+  revealjs:
+    slide-number: true
+    width: 1600
+    height: 900
+    chalkboard:
+      buttons: false
+    preview-links: auto
+    css: styles.css
+    footer: "Algorithm Engineering SS 2026 — T05 Benchmarking & Parameter Tuning"
+    progress: true
+    transition: none
+    background-transition: none
+    theme: dark
+    highlight-style: github
+    code-overflow: wrap
+bibliography: references.bib
+---
+
+<!-- ============================================================
+     T05 — Benchmarking & Parameter Tuning
+     Two halves:
+       (A) Benchmarking            _00 .. _02
+       (B) Log reading + tuning    _03 .. _06
+     Primary sources (cpsat-primer, ~/Repositories/cpsat-primer):
+       - chapters/benchmarking.md           -> _01, _02
+       - chapters/understanding_the_log.md  -> _03
+       - chapters/parameters.md             -> _03 (subsolver contribution), _04
+     ============================================================ -->
+
+{{< include _00-intro.qmd >}}
+{{< include _01-benchmarking-pitfalls.qmd >}}
+{{< include _02-benchmarking-visualization.qmd >}}
+{{< include _02b-study-design.qmd >}}
+{{< include _03-reading-the-log.qmd >}}
+{{< include _04-tuning-search.qmd >}}
+{{< include _05-optuna-tutorial.qmd >}}
+{{< include _06-wrap-up.qmd >}}
+
+## References
+
+::: {#refs}
+:::

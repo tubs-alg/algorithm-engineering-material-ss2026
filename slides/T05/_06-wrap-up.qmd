@@ -1,0 +1,86 @@
+<!-- Sources for Wrap-up:
+     - Synthesis of the three movements. No new external material.
+     - ASSET TODO: assets/symbol_wrapup.png
+-->
+
+# Wrap-up {background-image="assets/symbol_wrapup.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+That's all folks!
+
+## What this tutorial covered
+
+:::: {.columns .viz-row}
+::: {.column width="33%"}
+![](assets/cactus_plot.png)
+:::
+::: {.column width="33%"}
+::: {.loglet}
+```
+Starting CP-SAT solver v9.15.6755
+Setting number of workers to 24
+
+Initial optimization model 'multiple_knapsack':
+#Variables: 560 (#bools: 560)
+#kLinearN: 144 (#terms: 1'120)
+
+Starting presolve at 0.00s
+[Symmetry] #generators: 7, average support size: 8
+presolved: 560 vars, 144 constraints
+
+Starting search at 0.01s with 24 workers
+#1     0.01s best:1891  next:[1892,3797] no_lp
+#5     0.01s best:1939  next:[1940,2271] core
+#10    0.01s best:2226  next:[2227,2271] default_lp
+#13    0.02s best:2266  next:[2267,2271] reduced_costs
+#Bound 0.05s best:2267  next:[2268,2270] probing_max_lp
+#15    0.08s best:2269  next:[2270,2270] default_lp
+#16    0.18s best:2270  next:[]          graph_var_lns
+
+Solutions (7)             Num   Rank
+                'no_lp':    3  [1,7]
+        'quick_restart':    1  [3,3]
+  'quick_restart_no_lp':    3  [2,5]
+
+CpSolverResponse summary:
+status: OPTIMAL
+objective: 2270
+best_bound: 2270
+gap_integral: 0.44563
+```
+:::
+:::
+::: {.column width="33%"}
+![](assets/surrogate_acquisition_5.png)
+:::
+::::
+
+:::: {.columns .col-titles}
+::: {.column width="33%"}
+### Benchmarking
+:::
+::: {.column width="33%"}
+### Reading the log
+:::
+::: {.column width="33%"}
+### Parameter tuning
+:::
+::::
+
+:::: {.columns .bullet-row .smaller}
+::: {.column width="33%"}
+- A win needs the full instance set, not three.
+- Median + IQR; cactus / performance / split under timeouts.
+- Match the metric and plot to the goal.
+:::
+::: {.column width="33%"}
+- The Solutions and bounds blocks show the real work.
+- Strategy ranks point at what to tune.
+- A tuning hypothesis, for free.
+:::
+::: {.column width="33%"}
+- Random search is the baseline.
+- Model-based search (TPE) spends budget where it pays.
+- Prune relentlessly; run it in Optuna.
+:::
+::::
+

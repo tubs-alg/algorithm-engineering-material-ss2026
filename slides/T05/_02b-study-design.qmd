@@ -1,0 +1,46 @@
+<!-- Sources for Designing the Study:
+     - cpsat-primer chapters/benchmarking.md
+         §"Distinguishing Exploratory and Workhorse Studies"  (~940-1042)
+         §"Selecting a Benchmark Instance Set"                (~1043-1128)
+         §"Efficiently Managing Your Benchmarks"              (~1129-1216)
+     - Two study-design slides moved here from _02 (exploratory vs. workhorse;
+       instance-set selection + run management).
+     - The overfitting warning now lives in _03 (after "prune the portfolio"), where
+       the tuning action that creates the risk actually happens.
+     - ASSET TODO: assets/symbol_study.png
+-->
+
+# Designing the Study {background-image="assets/symbol_study.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+A benchmark is only as good as the instances it runs on.
+
+## Exploratory vs. workhorse studies
+
+:::: {.columns}
+::: {.column width="50%"}
+**Exploratory** — fast, cheap, throwaway.
+
+- few instances, short limits.
+- Build intuition, kill bad ideas early.
+- Conclusions are *hypotheses*, not results.
+:::
+::: {.column width="50%"}
+**Workhorse** — large, rigorous, reproducible.
+
+- Curated instance set, fixed seeds, pinned environment.
+- The numbers you put in a paper or a deploy decision.
+:::
+::::
+
+::: {.platypus-warning}
+The classic failure: Not clearly distinguishing the two. Don't just "iterate" an exploratory study until it feels like a workhorse study.
+:::
+
+## Selecting the instance set, and managing the runs
+
+- **Instance set:** representative of production, spanning sizes; include hard cases, not just the solvable ones. Beware homogeneous generators that hide the no-free-lunch effect.
+- **Reproducibility:** allow others to rerun your study.
+- **Log everything:** there will be outliers and Heisenbugs; you can only debug on the data you saved.
+- **Folder discipline:** `evaluations/<problem>/<date_tag>/` with `PRIVATE_DATA` + `PUBLIC_DATA`, a `README`, numbered scripts (`00_generate`, `01_run`, …).
+- **Make runs observable, interruptible & resumable** — the longer the runs, the higher the risk of system failures.
+

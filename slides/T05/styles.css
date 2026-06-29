@@ -1,0 +1,256 @@
+.border {
+  border: 1px solid #dee2e6;
+}
+
+.smaller {
+  font-size: 0.85em;
+}
+
+.source-note {
+  font-size: 0.55em;
+  color: #999;
+  margin-top: 0.5em;
+}
+
+figcaption {
+  text-align: center !important;
+}
+
+.highlight-box {
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 3px solid #f39c12;
+  padding: 0.5em 0.8em;
+  margin-top: 0.5em;
+  border-radius: 4px;
+}
+
+.center-title h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+}
+
+.compact-table table {
+  font-size: 0.8em;
+}
+
+/* KPI table: let columns size to their content instead of forced equal widths. */
+.kpi-table table {
+  width: auto;
+  table-layout: auto;
+  margin: 0 auto;
+}
+.kpi-table th,
+.kpi-table td {
+  white-space: nowrap;
+  width: auto;
+}
+
+/* Fit table: columns size to their content instead of pandoc's fixed
+   percentage widths, but cells may still wrap (no nowrap). */
+.fit-table table {
+  width: auto;
+  table-layout: auto;
+  margin: 0 auto;
+}
+.fit-table colgroup,
+.fit-table col {
+  width: auto !important;
+}
+
+/* Bordered box framing the SAT feature-family columns. */
+.feature-box {
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 0.6em 0.9em;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Platypus callout boxes — mirrors cpsat-primer style for RevealJS.
+   Usage: ::: {.platypus-tip} / .platypus-warning / .platypus-info
+   The platypus appears on the left via ::before background-image. */
+/* Grid layout (not flex): every paragraph in the body would otherwise become
+   a separate flex item and render side-by-side. Grid pins the platypus image
+   to its column and lets content paragraphs stack as rows in the other column. */
+.platypus-tip,
+.platypus-warning,
+.platypus-info,
+.platypus-book,
+.platypus-video,
+.callout-warning {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 1em;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 0.7em 1em;
+  margin: 0.5em 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.platypus-tip::before,
+.platypus-warning::before,
+.platypus-info::before,
+.platypus-book::before,
+.platypus-video::before,
+.callout-warning::before {
+  content: "";
+  width: 90px;
+  height: 180px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  grid-column: 1;
+  grid-row: 1 / span 100;
+  align-self: center;
+}
+
+/* Book/Video variants: platypus on the right via ::after */
+.platypus-book,
+.platypus-video {
+  grid-template-columns: 1fr auto;
+}
+
+.platypus-book::after,
+.platypus-video::after {
+  grid-column: 2;
+  grid-row: 1 / span 100;
+  align-self: center;
+}
+
+.platypus-tip { background: rgba(80, 160, 80, 0.12); border-color: #5a9e5a; }
+.platypus-tip::before { background-image: url('assets/idea_platypus.webp'); }
+
+.platypus-warning,
+.callout-warning { background: rgba(200, 120, 40, 0.12); border-color: #c87828; }
+.platypus-warning::before,
+.callout-warning::before { background-image: url('assets/warning_platypus.webp'); }
+
+.callout-warning .callout-title { display: none; }
+
+.platypus-info { background: rgba(60, 140, 200, 0.12); border-color: #3c8cc8; }
+.platypus-info::before { background-image: url('assets/info_platypus.webp'); }
+
+.platypus-book { background: rgba(140, 100, 200, 0.12); border-color: #8c64c8; }
+.platypus-book::before { display: none; }
+.platypus-book::after {
+  content: "";
+  flex-shrink: 0;
+  width: 120px;
+  height: 240px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('assets/book_platypus.webp');
+}
+
+.platypus-video { background: rgba(200, 60, 80, 0.12); border-color: #c83c50; }
+.platypus-video::before { display: none; }
+.platypus-video::after {
+  content: "";
+  flex-shrink: 0;
+  width: 120px;
+  height: 240px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('assets/tv_platypus.webp');
+}
+
+.full-height pre {
+  max-height: none !important;
+  height: 715px;
+}
+
+/* Output / terminal output blocks — visually distinct from source code.
+   Quarto renders ```text as: pre.sourceCode.text > code.sourceCode
+   (language is a class on <pre>, not on <code>) */
+pre.sourceCode.text {
+  background: #0d1a26 !important;
+  border-left: 3px solid #4fc3f7;
+  border-radius: 4px;
+}
+
+pre.sourceCode.text code {
+  font-size: 0.75em;
+  color: #a8c8a0 !important;
+  /* OPAQUE background, not transparent. The quarto-line-highlight plugin animates
+     a code-line-numbers jump by cloning the <code> once per step and stacking the
+     clones (position:absolute) over the base block. A transparent clone lets the
+     base show through, so the log renders DOUBLED / garbled. An opaque background
+     (matching the <pre>) makes each clone hide the one beneath it. This is what
+     was breaking the log line-jump animations. */
+  background: #0d1a26 !important;
+}
+
+/* Intro overview slide: three visuals + a row of titles + a row of bullets.
+   The visuals, the titles, and the bullets each live in their OWN .columns
+   environment so the title row is a single equal-height flex row and the
+   bullets all start at the same vertical position regardless of title length.
+   (Quarto's default .columns is inline-block, not flex — we override the
+   wrapper to flex here so the three columns share one equal-height row.) */
+.viz-row,
+.col-titles,
+.bullet-row {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1.5em;
+}
+
+.viz-row { align-items: center; }
+.col-titles { align-items: stretch; }
+.bullet-row { align-items: flex-start; }
+
+.viz-row .column,
+.col-titles .column,
+.bullet-row .column {
+  text-align: center;
+}
+
+.bullet-row .column { text-align: left; }
+
+.viz-row img {
+  max-height: 300px;
+  width: auto;
+  margin: 0 auto;
+}
+
+/* Tiny log thumbnail — looks like terminal output, sized to match the images. */
+.loglet {
+  height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: #0d1a26;
+  border-left: 3px solid #4fc3f7;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.loglet pre {
+  margin: 0;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0.4em 0.7em !important;
+  width: 100%;
+}
+
+.loglet pre code {
+  font-size: 0.34em;
+  line-height: 1.3;
+  color: #a8c8a0 !important;
+  background: transparent !important;
+  white-space: pre;
+}
+
+.col-titles .column h3 {
+  margin: 0.3em 0 0;
+  text-align: center;
+}

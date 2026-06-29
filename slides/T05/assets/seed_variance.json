@@ -1,0 +1,143 @@
+{
+  "instance": {
+    "n_items": 27,
+    "size_bits": 27,
+    "instance_seed": 42,
+    "n_bins": 2
+  },
+  "num_workers": 1,
+  "time_limit_s": 60.0,
+  "n_runs": 20,
+  "all_optimal": false,
+  "unique_optima": [
+    725763975
+  ],
+  "min": 0.127,
+  "max": 60.001,
+  "ratio_max_min": 472.4,
+  "mean": 14.581,
+  "median": 10.721,
+  "pstdev": 14.809,
+  "runs": [
+    {
+      "seed": 0,
+      "status": "OPTIMAL",
+      "wall_time": 3.935,
+      "objective": 725763975
+    },
+    {
+      "seed": 1,
+      "status": "OPTIMAL",
+      "wall_time": 15.21,
+      "objective": 725763975
+    },
+    {
+      "seed": 2,
+      "status": "OPTIMAL",
+      "wall_time": 2.616,
+      "objective": 725763975
+    },
+    {
+      "seed": 3,
+      "status": "OPTIMAL",
+      "wall_time": 20.819,
+      "objective": 725763975
+    },
+    {
+      "seed": 4,
+      "status": "OPTIMAL",
+      "wall_time": 18.185,
+      "objective": 725763975
+    },
+    {
+      "seed": 5,
+      "status": "OPTIMAL",
+      "wall_time": 11.291,
+      "objective": 725763975
+    },
+    {
+      "seed": 6,
+      "status": "OPTIMAL",
+      "wall_time": 11.865,
+      "objective": 725763975
+    },
+    {
+      "seed": 7,
+      "status": "OPTIMAL",
+      "wall_time": 23.364,
+      "objective": 725763975
+    },
+    {
+      "seed": 8,
+      "status": "OPTIMAL",
+      "wall_time": 9.058,
+      "objective": 725763975
+    },
+    {
+      "seed": 9,
+      "status": "OPTIMAL",
+      "wall_time": 0.661,
+      "objective": 725763975
+    },
+    {
+      "seed": 10,
+      "status": "OPTIMAL",
+      "wall_time": 9.036,
+      "objective": 725763975
+    },
+    {
+      "seed": 11,
+      "status": "OPTIMAL",
+      "wall_time": 0.465,
+      "objective": 725763975
+    },
+    {
+      "seed": 12,
+      "status": "OPTIMAL",
+      "wall_time": 6.341,
+      "objective": 725763975
+    },
+    {
+      "seed": 13,
+      "status": "OPTIMAL",
+      "wall_time": 20.764,
+      "objective": 725763975
+    },
+    {
+      "seed": 14,
+      "status": "OPTIMAL",
+      "wall_time": 8.468,
+      "objective": 725763975
+    },
+    {
+      "seed": 15,
+      "status": "OPTIMAL",
+      "wall_time": 0.127,
+      "objective": 725763975
+    },
+    {
+      "seed": 16,
+      "status": "OPTIMAL",
+      "wall_time": 10.15,
+      "objective": 725763975
+    },
+    {
+      "seed": 17,
+      "status": "OPTIMAL",
+      "wall_time": 47.515,
+      "objective": 725763975
+    },
+    {
+      "seed": 18,
+      "status": "FEASIBLE",
+      "wall_time": 60.001,
+      "objective": 725763978
+    },
+    {
+      "seed": 19,
+      "status": "OPTIMAL",
+      "wall_time": 11.743,
+      "objective": 725763975
+    }
+  ]
+}
