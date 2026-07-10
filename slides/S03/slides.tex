@@ -8,6 +8,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{qrcode}
 \usepackage{geometry}
 \usepackage{tikz}
 \usepackage{amsthm}
@@ -97,6 +98,18 @@
 \begin{frame}[plain]
 	\titlepage
 \end{frame}	
+
+\begin{frame}{evaluation}
+	\begin{center}
+		\qrcode[height=0.6\textheight]{https://umfragen.tu-bs.de/evasys/online.php?pswd=9728N}
+		
+		\vspace{15pt}
+		
+		\url{https://umfragen.tu-bs.de/evasys/online.php?pswd=9728N}
+	\end{center}
+	
+\end{frame}
+
 
 \section{Ex1}
 
@@ -339,7 +352,7 @@ def clique_cut_separation(self, solution: Sequence[float]) -> list[int] | None:
 
 \begin{frame}[fragile]{Ex1d: Clique Cuts}
 	\begin{minted}{python}
-	// candidates are without 1 and 0 -> all are interesting        
+	# candidates are without 1 and 0 -> all are interesting        
 	for anchor in candidates[:20]:
 		clique = [anchor]; value = solution[anchor]
 		extensions = self.exclusion_graph[anchor].copy()
