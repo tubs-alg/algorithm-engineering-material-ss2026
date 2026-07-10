@@ -1,0 +1,50 @@
+---
+title: "Coding Patterns, TDD & Debugging"
+subtitle: "Algorithm Engineering — T06"
+author: Dr. Dominik Krupke
+format:
+  revealjs:
+    slide-number: true
+    width: 1600
+    height: 900
+    chalkboard:
+      buttons: false
+    preview-links: auto
+    css: styles.css
+    footer: "Algorithm Engineering SS 2026 — T06 Coding Patterns, TDD & Debugging"
+    progress: true
+    transition: none
+    background-transition: none
+    theme: dark
+    highlight-style: github
+    code-overflow: wrap
+bibliography: references.bib
+---
+
+<!-- ============================================================
+     T06 — Coding Patterns, TDD, Explainability/Debugging
+     Structure follows week12-t06-tdd/README.md literally:
+       1. Notebooks are not production-ready       -> _01
+       2. Good optimization code (SE principles)    -> _02
+       3. Coding patterns [CP-SAT Primer]            -> _03
+       4. Test-driven optimization [TDD chapter]      -> _04
+       5. Debugging & explainability [L03, superficial] -> _05
+     Primary sources (read in full for this deck):
+       - ~/Repositories/cpsat-primer/chapters/coding_patterns.md
+       - ~/Repositories/cpsat-primer/chapters/test_driven_optimization.md
+       - ~/Repositories/forks/constraint-solving-course/lectures/L03-SolveDebugExplain.tex
+         (Guns & Tsouros, KU Leuven, CC BY-NC-SA 4.0 — attribution required on reused slides)
+       - ~/Repositories/cpsat-utils (actual package source, for accurate API)
+     ============================================================ -->
+
+{{< include _00-intro.qmd >}}
+{{< include _02-good-code-properties.qmd >}}
+{{< include _03-coding-patterns.qmd >}}
+{{< include _04-testing-tdd.qmd >}}
+{{< include _05-debugging-explainability.qmd >}}
+{{< include _06-wrap-up.qmd >}}
+
+## References
+
+::: {#refs}
+:::

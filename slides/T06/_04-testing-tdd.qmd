@@ -1,0 +1,145 @@
+<!-- Sources for TDD / Testing:
+     - README.md outline bullet 4 + "### Testing" bullet list
+     - ~/Repositories/cpsat-primer/chapters/test_driven_optimization.md:
+       data-generation helpers, "Minimum Off Time" key tests (run_min_rest_test) + WARNING,
+       "Modules" (cpsat-utils helpers), "No Blocked Shifts" (red/green steps),
+       "Property-based Testing"
+     - ~/Repositories/cpsat-primer/chapters/coding_patterns.md: saved-test-cases symmetry comment
+     - ~/Repositories/cpsat-utils/src/cpsat_utils/testing.py (actual API)
+     - ~/Repositories/cpsat-utils/tests/piecewise/test_linear.py (actual test suite:
+       TestAddUpperBound.test_convex_function / test_non_convex_function)
+     - ASSET TODO: assets/symbol_tdd.png
+-->
+
+# Test-Driven Optimization {background-image="assets/symbol_tdd.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+Writing tests early clarifies requirements before they cost you.
+
+## Scenario Builder Pattern
+
+```python
+def test_back_to_back_shifts_violate_min_rest():
+    (
+        NurseScenarioBuilder()
+        .add_shift(day=0, start_hour=0, length=8)
+        .add_shift(day=0, start_hour=8, length=8)  # starts exactly when the first ends
+        .add_nurse("Alice", min_time_between_shifts=timedelta(hours=8))
+        .assign("Alice", shifts=[0, 1])             # forced onto both, no rest between them
+        .assert_infeasible()
+    )
+```
+
+::: {.platypus-tip}
+The defining trait: each call mutates internal state and returns `self`, so calls chain, and the terminal call, here `assert_infeasible()`, is the one hidden step that builds the CP-SAT model, wires in every module, solves, and checks the outcome.
+:::
+
+## Test submodules in isolation
+
+```python
+def run_min_rest_test(assignments, expected_feasible):
+    shifts = create_shifts(len(assignments), shift_length=8)
+    nurse = create_nurse("Nurse A", min_time_between_shifts=timedelta(hours=8))
+    instance = NurseRosteringInstance(nurses=[nurse], shifts=shifts)
+    context = AssertModelFeasible() if expected_feasible else AssertModelInfeasible()
+    with context as model:
+        nurse_vars = NurseDecisionVars(nurse, shifts, model)
+        MinTimeBetweenShifts().build(instance, model, [nurse_vars])
+        for shift, assign in zip(shifts, assignments):
+            if assign is not None:
+                nurse_vars.fix(shift.uid, assign)
+
+run_min_rest_test([True, False, True], expected_feasible=True)        # every shift fixed
+run_min_rest_test([None, True, True, None], expected_feasible=False)  # only the colliding pair fixed
+```
+
+::: {.platypus-warning}
+**Feasibility**: fix every assignment you can and push it right to the limit. **Infeasibility**: fix only the shifts that actually collide, leave everything else free.
+:::
+
+## A submodule tested with no surrounding problem
+
+```python
+from cpsat_utils.piecewise import PiecewiseLinearFunction
+from cpsat_utils.testing import assert_objective
+
+def test_add_upper_bound_convex():
+    """Concave-shaped function: a single convex part, no auxiliary variables."""
+    f = PiecewiseLinearFunction([0, 10, 20], [0, 10, 5])
+    model = cp_model.CpModel()
+    x = model.new_int_var(0, 20, "x")
+    y = f.add_upper_bound(model, x)
+    model.maximize(y)
+    solver = assert_objective(model, 10)  # push x to the peak
+    assert solver.value(x) == 10
+
+def test_add_upper_bound_non_convex():
+    """Non-convex function: needs reified segment-selector constraints internally."""
+    f = PiecewiseLinearFunction([0, 10, 20], [0, 10, 50])
+    model = cp_model.CpModel()
+    x = model.new_int_var(0, 20, "x")
+    y = f.add_upper_bound(model, x)
+    model.maximize(y)
+    solver = assert_objective(model, 50)
+    assert solver.value(x) == 20
+```
+
+::: {.platypus-tip}
+No knapsack, no nurse rostering, no domain in sight: the same maximize-and-check-the-peak discipline from the previous slide, now applied to a function with no surrounding problem at all.
+:::
+
+## `cpsat-utils` test helpers
+
+```python
+from cpsat_utils.testing import (
+    AssertModelFeasible, AssertModelInfeasible, assert_objective,
+)
+
+with AssertModelFeasible() as model:
+    ...   # raises RuntimeError if the model turns out infeasible
+
+with AssertModelInfeasible() as model:
+    ...   # raises RuntimeError if the model turns out feasible
+
+assert_objective(model=model, expected=-1.0)  # feasible AND optimum matches
+```
+
+## Prove the test bites before it passes
+
+```python
+class NoBlockedShiftsModule(ShiftAssignmentModule):
+    def build(self, instance, model, nurse_shift_vars):
+        return 0  # TODO: nothing enforced yet
+```
+
+```python
+def test_no_blocked_shifts_infeasible():
+    """A nurse forced onto a blocked shift must make the model infeasible."""
+    with AssertModelInfeasible() as model:
+        nurse_vars = NurseDecisionVars(nurse, shifts, model)
+        NoBlockedShiftsModule().build(instance, model, [nurse_vars])
+        nurse_vars.fix(shifts[0].uid, True)  # forcing the blocked assignment
+```
+
+## Immune to symmetries, not to fixed seeds
+
+```python
+new_solution = solve_knapsack(instance, config)
+assert new_solution.objective <= solution.upper_bound
+assert solution.objective <= new_solution.upper_bound
+# Do not test for the selected items: the solver might return a
+# different solution of the same quality.
+```
+
+## Property-based testing
+
+```python
+from hypothesis import given, strategies as st
+
+@given(st.lists(st.integers()))
+def test_sort_properties(xs):
+    ys = sorted(xs)
+    assert len(ys) == len(xs)                       # length preserved
+    assert all(a <= b for a, b in zip(ys, ys[1:]))   # non-decreasing
+    assert Counter(ys) == Counter(xs)                # same multiset
+```
+

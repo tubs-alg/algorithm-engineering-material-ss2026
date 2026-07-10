@@ -1,0 +1,159 @@
+<!-- Sources for Coding Patterns:
+     - README.md outline bullet 3 (Single Function, I/O Schemas, Index for Queries,
+       Class instead of Function, Variable Containers, Submodels)
+     - ~/Repositories/cpsat-primer/chapters/coding_patterns.md, sections:
+       "Simple Function", "Custom Data Classes...", "Solver Class",
+       "Variable Containers", "Lazy Variable Construction", "Submodels"
+     - ASSET TODO: assets/symbol_patterns.png
+-->
+
+# Coding Patterns {background-image="assets/symbol_patterns.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+Six patterns, mostly on the same running example: knapsack.
+
+## Pattern 1: Single Function for Simple Use Cases
+
+```python
+def solve_knapsack(
+    weights: list[int], values: list[int], capacity: int
+) -> list[int]:
+    model = cp_model.CpModel()
+    n = len(weights)
+    x = [model.new_bool_var(f"x_{i}") for i in range(n)]
+
+    accumulated_weight = sum(weights[i] * x[i] for i in range(n))
+    model.add(accumulated_weight <= capacity)
+    accumulated_value = sum(values[i] * x[i] for i in range(n))
+    model.maximize(accumulated_value)
+
+    solver = cp_model.CpSolver()
+    status = solver.solve(model)
+    ok = status in (cp_model.OPTIMAL, cp_model.FEASIBLE)
+    return [i for i in range(n) if solver.value(x[i])] if ok else []
+```
+
+::: {.platypus-confucypus}
+Every line of code is a liability. Only use the more complex patterns and principles if they are needed to manage complexity, testability, or change. Otherwise, a single function is the right amount of structure.
+:::
+
+## Pattern 2: Proper Input and Output Schemas
+
+```python
+class KnapsackInstance(BaseModel):
+    weights: list[PositiveInt] = Field(..., description="Weight of each item, must be positive")
+    values: list[PositiveInt] = Field(..., description="Value of each item, must be positive")
+    capacity: PositiveInt = Field(..., description="Maximum weight the knapsack can carry, must be positive")
+
+class KnapsackSolverConfig(BaseModel):
+    time_limit: PositiveFloat = Field(10.0, description="Time limit for the solver in seconds, must be positive")
+    opt_tol: NonNegativeFloat = Field(0.0, description="Optimality tolerance for the solver, must be non-negative")
+
+type ItemIdx = int
+
+class KnapsackSolution(BaseModel):
+    selected_items: list[ItemIdx] = Field(..., description="Indices of items selected to pack in the knapsack")
+```
+
+::: {.platypus-warning}
+The schema must already be fully prepared for optimization. No preprocessing inside the model, that would combine two hard jobs into one unmaintainable one.
+:::
+
+## Pattern 3: An Index for Efficient and Readable Queries
+
+Certain queries may require indices that do not belong into the pure data model.
+
+```python
+class NurseRosteringIndex:
+    """Built once from the instance; each query is a dict lookup, not a scan."""
+    def __init__(self, instance: NurseRosteringInstance): ...
+
+    def nurses_with_skill(self, skill: Skill) -> list[NurseId]: ...
+    def available_for(self, shift: ShiftId) -> list[NurseId]: ...
+    def qualified_for(self, shift: ShiftId) -> list[NurseId]: ...
+    def feasible_shifts(self, nurse: NurseId) -> list[ShiftId]: ...
+    def shifts_on(self, day: Day) -> list[ShiftId]: ...
+    def conflicting_shifts(self, shift: ShiftId) -> list[ShiftId]: ...  # overlapping
+```
+
+```python
+for shift in instance.shifts:                              # covering constraint
+    qualified = index.nurses_with_skill(shift.required_skill)
+    model.add_at_least_one(x[n, shift.id] for n in qualified)  # no scan over all nurses
+```
+
+::: {.platypus-tip}
+These indices are generally very nice to unit test. Move as much of the modelling logic into them as possible.
+:::
+
+## Pattern 4: Class Instead of Function
+
+```python
+class KnapsackSolver:
+    def __init__(self, instance: KnapsackInstance, config: KnapsackSolverConfig):
+        self.instance, self.config = instance, config
+        self.model = cp_model.CpModel()
+        self.x = [self.model.new_bool_var(f"x_{i}") for i in range(len(instance.weights))]
+        self._build_model()
+        self.solver = cp_model.CpSolver()
+
+    def solve(self, time_limit=None) -> KnapsackSolution:
+        ...  # set parameters, solve, extract
+
+    def prohibit_combination(self, item_a: int, item_b: int):
+        """Discovered after showing the user a solution: these two must not co-pack."""
+        self.model.add(self.x[item_a] + self.x[item_b] <= 1)
+```
+
+```python
+solver = KnapsackSolver(instance, config)
+solution = solver.solve()
+solver.prohibit_combination(0, 1)      # a downstream check reveals a new rule
+solution = solver.solve(time_limit=5)  # re-solve, no rebuild
+```
+
+::: {.platypus-tip}
+A stateless function cannot express "add this constraint and re-solve." A class holding both model and solver can, without rebuilding from scratch.
+:::
+
+## Pattern 5: Variable Containers
+
+```python
+class _ItemSelectionVars:
+    def __init__(self, instance, model, var_name="x"):
+        self.instance = instance
+        self.x = [model.new_bool_var(f"{var_name}_{i}")
+                  for i in range(len(instance.weights))]
+
+    def packs_item(self, i):  return self.x[i]
+    def used_weight(self):    return sum(w * xi for w, xi in zip(self.instance.weights, self.x))
+    def packed_value(self):   return sum(v * xi for v, xi in zip(self.instance.values, self.x))
+```
+
+```python
+self.model.add(self._item_vars.used_weight() <= self.instance.capacity)
+self.model.maximize(self._item_vars.packed_value())
+```
+
+::: {.platypus-tip}
+Potentially lazy generation: mint a variable in `__getitem__` on first access instead of up front, when only a few of quadratically many candidates are ever used.
+:::
+
+## Pattern 6: Submodels
+
+```python
+from cpsat_utils.piecewise import PiecewiseLinearFunction
+
+f_costs = PiecewiseLinearFunction.from_points([(0, 0), (1000, 400), (1500, 1300)])
+f_gain  = PiecewiseLinearFunction.from_points([(0, 0), (100, 800), (300, 2000)])
+
+y_cost = f_costs.add_lower_bound(model, buy_1)     # y >= f(buy_1)
+y_gain = f_gain.add_upper_bound(model, produce_1)  # y <= f(produce_1)
+model.maximize(y_gain - y_cost)                    # internal vars stay hidden
+```
+
+Hiding the internal auxiliary variables behind `add_lower_bound`/`add_upper_bound` buys:
+
+- **reusable** — the same submodel plugs into knapsack, nurse rostering, anything with the right shape,
+- **swappable** — a faster internal encoding later, without touching a single caller,
+- **testable in isolation** — the real prize, a tiny model with nothing to do with the surrounding problem.
+

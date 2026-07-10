@@ -1,0 +1,25 @@
+<!-- Sources for Wrap-up:
+     - Synthesis of the four movements + README.md key message. No new external material.
+     - ASSET TODO: assets/symbol_wrapup.png
+-->
+
+# Wrap-up {background-image="assets/symbol_wrapup.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+Optimization code that isn't tested is optimization code you can't trust.
+
+## Four movements, one habit
+
+1. Good optimization code: narrow interfaces, readable math, a solver-independent spec.
+2. Coding patterns: the concrete shapes, functions, classes, containers, submodels.
+3. Test-driven optimization: write the test, watch it fail, make it pass.
+4. Debugging and explainability: when it breaks, isolate first; when it is UNSAT, ask for a small subset, not a verdict on everything.
+
+## Further reading
+
+::: {.platypus-book}
+- The CP-SAT Primer: Coding Patterns [@cpsat-primer]
+- The CP-SAT Primer: Test-Driven Development with CP-SAT [@cpsat-primer]
+- `cpsat-utils`: testing helpers and piecewise-linear submodels [@cpsat-utils]
+- Guns & Tsouros, *Solving, Debugging and Explanation Techniques* — KU Leuven Constraint Solving Course, L03 [@guns-tsouros-l03]
+:::
+

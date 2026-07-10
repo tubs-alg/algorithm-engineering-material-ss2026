@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="273.6pt" height="158.22pt" viewBox="0 0 273.6 158.22" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-07-08T12:38:32.756626</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 158.22 
+L 273.6 158.22 
+L 273.6 0 
+L 0 0 
+L 0 158.22 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 141.637527 114.613509 
+C 167.827903 110.896503 191.310551 103.590361 206.91369 94.304178 
+C 222.516828 85.017994 228.96653 74.509944 224.842323 65.094303 
+C 220.718116 55.678663 206.356723 48.124177 184.921076 44.094634 
+C 163.485428 40.065091 136.72565 39.889485 110.535273 43.606491 
+C 84.344897 47.323497 60.862249 54.629639 45.25911 63.915822 
+C 29.655972 73.202006 23.20627 83.710056 27.330477 93.125697 
+C 31.454684 102.541337 45.816077 110.095823 67.251724 114.125366 
+C 88.687372 118.154909 115.44715 118.330515 141.637527 114.613509 
+z
+" clip-path="url(#p4e8c29232c)" style="fill: #7fbf7b; opacity: 0.65; stroke: #9aa6b5; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <!-- $\mathcal{U}$ -->
+    <g style="fill: #e6e6e6" transform="translate(93.0024 84.62875)">
+     <text>
+      <tspan x="0" y="-0.34375" style="font-size: 20px; font-family: 'cmsy10'; fill: #e6e6e6">U</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m981132767e" d="M 0 3.708099 
+C 0.983399 3.708099 1.926654 3.317391 2.622022 2.622022 
+C 3.317391 1.926654 3.708099 0.983399 3.708099 0 
+C 3.708099 -0.983399 3.317391 -1.926654 2.622022 -2.622022 
+C 1.926654 -3.317391 0.983399 -3.708099 0 -3.708099 
+C -0.983399 -3.708099 -1.926654 -3.317391 -2.622022 -2.622022 
+C -3.317391 -1.926654 -3.708099 -0.983399 -3.708099 0 
+C -3.708099 0.983399 -3.317391 1.926654 -2.622022 2.622022 
+C -1.926654 3.317391 -0.983399 3.708099 0 3.708099 
+z
+" style="stroke: #0f1724"/>
+    </defs>
+    <g clip-path="url(#p4e8c29232c)">
+     <use xlink:href="#m981132767e" x="163.584" y="60.8148" style="fill: #e6e6e6; stroke: #0f1724"/>
+     <use xlink:href="#m981132767e" x="190.368" y="77.5854" style="fill: #e6e6e6; stroke: #0f1724"/>
+    </g>
+   </g>
+   <g id="text_2">
+    <!-- $\xi_1$ -->
+    <g style="fill: #e6e6e6" transform="translate(136.8 54.7164)">
+     <text>
+      <tspan x="0" y="-0.8125" style="font-size: 16px; font-family: 'cmmi10'; fill: #e6e6e6">»</tspan>
+      <tspan x="6.992188" y="1.9085" style="font-size: 11.2px; font-family: 'cmr10'; fill: #e6e6e6">1</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_3">
+    <!-- $\xi_2$ -->
+    <g style="fill: #e6e6e6" transform="translate(168.9408 92.8314)">
+     <text>
+      <tspan x="0" y="-0.8125" style="font-size: 16px; font-family: 'cmmi10'; fill: #e6e6e6">»</tspan>
+      <tspan x="6.992188" y="1.9085" style="font-size: 11.2px; font-family: 'cmr10'; fill: #e6e6e6">2</tspan>
+     </text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p4e8c29232c">
+   <rect x="2.88" y="2.88" width="267.84" height="152.46"/>
+  </clipPath>
+ </defs>
+</svg>

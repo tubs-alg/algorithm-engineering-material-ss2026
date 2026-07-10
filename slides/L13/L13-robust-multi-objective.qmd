@@ -1,0 +1,57 @@
+---
+title: "Beyond the Single Objective: Trade-offs and Uncertainty"
+subtitle: "Algorithm Engineering — L13"
+author: Dr. Dominik Krupke
+format:
+  revealjs:
+    slide-number: true
+    width: 1600
+    height: 900
+    chalkboard:
+      buttons: false
+    preview-links: auto
+    css: styles.css
+    footer: "Algorithm Engineering SS 2026 — L13 Robustness & Multi-Objective"
+    progress: true
+    transition: none
+    background-transition: none
+    theme: dark
+    highlight-style: github
+    code-overflow: wrap
+bibliography: references.bib
+---
+
+# Welcome {background-image="assets/welcome_symbol.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+<!-- Background figure: A laptop with code beside engineering drawings, drafting tools, and coffee frames the lecture as a bridge between optimization theory and implementation. The dark, low-opacity treatment is decorative rather than evidentiary; it conveys technical work but no specific result. -->
+
+<!-- Placeholder opener for TTS preview — to be replaced by a filmed intro. -->
+
+{{< include _00-intro.qmd >}}
+
+{{< include _01-what-is-better.qmd >}}
+
+{{< include _02-one-solution.qmd >}}
+
+{{< include _03-many-solutions.qmd >}}
+
+{{< include _04-fragile-forecasts.qmd >}}
+
+{{< include _05-diagnosis.qmd >}}
+
+{{< include _06-robust.qmd >}}
+
+{{< include _07-stochastic.qmd >}}
+
+{{< include _08-synthesis.qmd >}}
+
+# See you next lecture {background-image="assets/welcome_symbol.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+<!-- Background figure: The opening laptop-and-engineering-workspace image returns to close the lecture. Reuse provides visual bookending, but the scene remains a generic metaphor and should not be read as depicting a particular optimization workflow. -->
+
+<!-- Placeholder closer for TTS preview — to be replaced by a filmed outro. -->
+
+## References
+
+::: {#refs}
+:::
