@@ -1,0 +1,45 @@
+# Two steps back {background-image="assets/welcome_symbol.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+<!-- Sources for Intro:
+     - Project-lifecycle framing: material/deep-research-report.md +
+       material/irv_lustig_solutions.md
+     - Sequential-decision framing: material/book/book-summary.md +
+       material/nurse-rostering.md
+     - Divider background: assets/welcome_symbol.png (placeholder, reused from L13)
+-->
+
+The model is the part you now know how to build. It is rarely the part that decides success.
+
+## Where we have been, and the two gaps left
+
+Everything so far assumed a decision made **once**, from a model handed to us **already framed**.
+
+<hr>
+
+:::: {.columns}
+
+::: {.column width="48%"}
+::: {.fragment fragment-index=1}
+**Gap 1: the model is not the project.**
+
+Data, stakeholders, deployment, and adoption surround it. Ask a practitioner where projects die, and it is almost never the math.
+:::
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+::: {.fragment fragment-index=2}
+**Gap 2: decisions live in a running system.**
+
+Your output is not a one-shot answer but a policy that keeps acting: re-plan every night, re-price every week, refill when stock runs low. Information arrives *between* decisions.
+:::
+:::
+
+::::
+
+::: {.fragment .platypus-info}
+Two lenses for the two gaps: the **INFORMS Analytics Framework** for the project, **Sequential Decision Analytics** for the stream of decisions.
+:::
+

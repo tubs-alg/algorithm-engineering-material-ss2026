@@ -1,0 +1,208 @@
+# Part I: The Analytics Lifecycle {background-image="assets/symbol_informs.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+<!-- Sources for Part I (INFORMS):
+     - Official IAF overview, seven domains, task guidance, analytics framing,
+       and case evidence: material/deep-research-report.md
+     - Practitioner walkthrough of all seven IAF domains, deployment, lifecycle,
+       and 10-15% model-building effort: material/irv_lustig_solutions.md
+     - Princeton 20 / top-three project risks (scope, value, process maturity):
+       material/irv_lustig_decisions_podcast.md
+     - Divider background: assets/symbol_informs.png (placeholder, reused from L13)
+     - Figures: analytics_stack and lifecycle_cog are native CSS/SVG built inline
+       (analytics_stack here; lifecycle_cog in _01b-informs-lessons.qmd); no generators
+-->
+
+Zoom out until the solver is one box among seven.
+
+## Three kinds of analytics
+
+Sorted by the question each answers, not by difficulty.
+
+<!-- Slide-local styling for the analytics maturity stack (used only here;
+     generic reusable rules live in styles.css). Replaces analytics_stack.png:
+     native so tags stay readable and the deck's dark theme applies. -->
+<style>
+.analytics-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  width: 82%;
+  margin: 0.4em auto 0;
+}
+.analytics-stack .layer {
+  display: grid;
+  grid-template-columns: 5.6em 1fr;
+  align-items: center;
+  column-gap: 1em;
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 0.55em 1em;
+}
+.analytics-stack .layer .name { font-weight: 800; font-size: 1.15em; line-height: 1.05; }
+.analytics-stack .layer .q { font-style: italic; color: rgba(255, 255, 255, 0.7); }
+.analytics-stack .layer .tags { font-size: 0.86em; letter-spacing: 0.02em; opacity: 0.92; margin-top: 0.12em; }
+.analytics-stack .rests {
+  align-self: flex-start;
+  margin-left: 1.4em;
+  font-size: 0.86em;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1;
+}
+.analytics-stack .prescriptive { border-color: #7b5cc4; background: rgba(123, 92, 196, 0.16); }
+.analytics-stack .prescriptive .name, .analytics-stack .prescriptive .tags { color: #b39ae0; }
+.analytics-stack .predictive { border-color: #3c8cc8; background: rgba(60, 140, 200, 0.14); }
+.analytics-stack .predictive .name, .analytics-stack .predictive .tags { color: #6fb6e6; }
+.analytics-stack .descriptive { border-color: #e69138; background: rgba(230, 145, 56, 0.14); }
+.analytics-stack .descriptive .name, .analytics-stack .descriptive .tags { color: #f0a95c; }
+</style>
+
+::: {.analytics-stack}
+<div class="layer prescriptive">
+<div class="name">Prescriptive</div>
+<div><span class="q">what should we do?</span><div class="tags">optimization · decisions</div></div>
+</div>
+<div class="rests">▲ rests on</div>
+<div class="layer predictive">
+<div class="name">Predictive</div>
+<div><span class="q">what will happen?</span><div class="tags">forecasting · machine learning</div></div>
+</div>
+<div class="rests">▲ rests on</div>
+<div class="layer descriptive">
+<div class="name">Descriptive</div>
+<div><span class="q">what happened?</span><div class="tags">data · reporting · dashboards</div></div>
+</div>
+:::
+
+::: {.fragment .platypus-info}
+A **stack, not a menu**: a prescriptive decision rests on a prediction, which rests on a description of what is going on. Optimization is the top layer.
+:::
+
+## How a Project Actually Runs {.iaf-seven}
+
+<style>
+.iaf-seven h2 {
+  font-size: 1.58em;
+  line-height: 1.05;
+  display: inline-block;
+  padding: 0.08em 0.18em;
+  margin-bottom: 0.12em;
+}
+.iaf-seven .subtitle {
+  font-size: 0.78em;
+  margin: 0.05em 0 0.55em;
+  color: rgba(255,255,255,0.82);
+}
+.iaf-seven .layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(17em, 0.75fr);
+  gap: 1.25em;
+  align-items: start;
+}
+.iaf-seven .stage-grid {
+  display: grid;
+  grid-template-columns: 2.2em minmax(9em, 0.88fr) minmax(14em, 1.35fr);
+  border-top: 1px solid rgba(255,255,255,0.45);
+  font-size: 0.68em;
+}
+.iaf-seven .stage-grid > div {
+  padding: 0.28em 0.55em;
+  border-bottom: 1px solid rgba(255,255,255,0.28);
+  line-height: 1.16;
+}
+.iaf-seven .stage-grid .head {
+  color: rgba(255,255,255,0.78);
+  font-weight: 700;
+  font-size: 0.86em;
+  letter-spacing: 0.01em;
+}
+.iaf-seven .stage-grid .num {
+  color: #9cc5e8;
+  font-weight: 800;
+}
+.iaf-seven .stage-grid .stage {
+  font-weight: 700;
+}
+.iaf-seven .stage-grid .focus {
+  color: #f0a95c;
+}
+.iaf-seven .side {
+  display: grid;
+  gap: 0.55em;
+}
+.iaf-seven .takeaway,
+.iaf-seven .watch {
+  border-radius: 6px;
+  padding: 0.78em 0.9em;
+  font-size: 0.72em;
+  line-height: 1.25;
+}
+.iaf-seven .takeaway {
+  border-left: 4px solid #f39c12;
+  background: rgba(255,255,255,0.07);
+}
+.iaf-seven .watch {
+  border: 1.5px solid rgba(60,140,200,0.65);
+  background: rgba(60,140,200,0.10);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 5.8em;
+  column-gap: 0.8em;
+  align-items: center;
+}
+.iaf-seven .watch .label {
+  color: #9cc5e8;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.68em;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35em;
+}
+.iaf-seven .watch::after {
+  content: "";
+  width: 5.8em;
+  height: 5.8em;
+  background-image: url('assets/tv_platypus.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.iaf-seven .source-note {
+  margin-top: 0.45em;
+  font-size: 0.46em;
+}
+</style>
+
+<div class="subtitle">The INFORMS Analytics Framework: from vague business question to sustained decision system.</div>
+
+<div class="layout">
+<div>
+<div class="stage-grid">
+<div class="head">#</div><div class="head">Stage</div><div class="head">Main job</div>
+<div class="num">1</div><div class="stage">Business Problem Framing</div><div>Find a question whose answer is worth money.</div>
+<div class="num">2</div><div class="stage">Analytics Problem Framing</div><div>Define drivers, KPIs, assumptions, and baseline.</div>
+<div class="num">3</div><div class="stage">Data</div><div>Identify, acquire, clean, validate, document.</div>
+<div class="num">4</div><div class="stage">Methodology</div><div>Choose the approach and architecture.</div>
+<div class="num focus">5</div><div class="stage focus">Model Building</div><div class="focus">Variables, objective, constraints, calibration.</div>
+<div class="num">6</div><div class="stage">Deployment</div><div>Ship the system and the work change around it.</div>
+<div class="num">7</div><div class="stage">Lifecycle Management</div><div>Monitor, recalibrate, train, and keep value alive.</div>
+</div>
+</div>
+
+<div class="side">
+<div class="takeaway fragment">
+Building the model is <strong>stage 5</strong>: often just <strong>10-15%</strong> of project time, and rarely the stage that decides the outcome.
+</div>
+
+<div class="watch fragment">
+<div>
+<div class="label">Watch</div>
+Irv Lustig, <em>Optimization Solution Development &amp; Deployment</em><br>
+<a href="https://youtu.be/RA-q4lYZNvI">youtu.be/RA-q4lYZNvI</a>
+</div>
+</div>
+</div>
+</div>
+
+<div class="source-note">
+Seven domains of the INFORMS Analytics Framework [@informs_analytics_framework; @lustig2025roadmap]. <a href="https://www.informs.org/Professional-Development/Professional-Development-Classes/INFORMS-Analytics-Framework">informs.org/Professional-Development/Professional-Development-Classes/INFORMS-Analytics-Framework</a>
+</div>
+

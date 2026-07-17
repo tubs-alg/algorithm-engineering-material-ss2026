@@ -1,0 +1,41 @@
+# Recap {background-image="assets/symbol_recap.png" background-opacity="0.3" background-size="cover" background-color="#2d4059"}
+
+<!-- Sources for Recap:
+     - Mirrors _00-intro.qmd two-gap framing, now answered.
+     - Project lens: material/deep-research-report.md + material/irv_lustig_solutions.md
+     - Time lens: material/nurse-rostering.md + material/book/book-summary.md +
+       material/book-appendix-a_mathematics-of-sda.md
+     - Divider background: assets/symbol_recap.png (placeholder, reused from L13)
+-->
+
+Two steps back, two frameworks to take forward.
+
+## The two lenses, together
+
+:::: {.columns}
+
+::: {.column width="48%"}
+::: {.fragment fragment-index=1}
+[**The project lens**]{style="color:#e69138"}
+
+Your solver is **stage 5 of 7**. Projects die at deployment, not in the math. Assess scope, value, and maturity before you model.
+:::
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+::: {.fragment fragment-index=2}
+[**The time lens**]{style="color:#674ea7"}
+
+Decisions repeat under new information. Write the five elements, choose a **policy** among four classes, then tune it in the simulator: an optimizer over optimizers, aimed at the real cost.
+:::
+:::
+
+::::
+
+::: {.fragment .platypus-tip}
+Both lenses agree: the hard part was never the solve. It is the framing around it, and the sustaining after it.
+:::
+

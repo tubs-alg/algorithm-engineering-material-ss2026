@@ -1,0 +1,178 @@
+<!--
+  _01a-iaf-walkthrough.qmd — Detailed walk through the 7 IAF domains, task by task,
+  with a single running example (regional parcel carrier / vehicle routing) showing
+  "how each step could look like". Created 2026-07 at Dominik's request; expands the
+  single seven-stage overview table in _01-informs.qmd into a per-task walkthrough.
+
+  Each task is shown as: KEYWORD (bold step label) · GENERAL OBJECTIVE (the generic
+  "what you do") · EXAMPLE (nested bullet, the parcel-carrier instance).
+  Source of the tasks and recommendations: material/deep-research-report.md
+  (official IAF domains/task guidance + case evidence) and material/irv_lustig_solutions.md
+  (practitioner walkthrough of all seven domains).
+  ~3 tasks per slide, ~14 slides. Running example is self-contained (no cross-lecture deps).
+  Placement: after the seven-stage overview table, before the cogwheel/deployment/risks slides.
+-->
+
+## Domain I · Business Problem Framing {background-image="assets/bg_iaf_01_business_framing.png" background-size="cover"}
+
+[**Find a question whose answer is worth money, and agree on it.**]{style="color:#e69138"}
+
+1. [**State the problem:**]{style="color:#e69138"} name the pain and a target in plain words, as a business *question* with its background and scope, before anyone reaches for a model.
+   - *"Vans return after 19:00 and we pay 20% overtime. Can we get the fleet back by 18:00?"*
+2. [**Identify stakeholders:**]{style="color:#e69138"} sponsors, process owners, IT, influencers, end users, and each one's RACI role (responsible, accountable, consulted, informed).
+   - Sponsor: operations director. Users: dispatchers (route by hand). Affected: drivers. Data owner: IT / telematics.
+3. [**Amenable to analytics?:**]{style="color:#e69138"} confirm it is repeatable and data-rich enough to need a model, and name a concrete reason it might *not* be.
+   - Routing, yes. But first rule out the dull cause: too few vans is a *hiring* decision, not a model.
+
+## Domain I · Business Problem Framing, continued {background-image="assets/bg_iaf_01_business_framing.png" background-size="cover"}
+
+[**Sharpen the question, price it, and get a signature.**]{style="color:#e69138"}
+
+4. [**Refine until clear:**]{style="color:#e69138"} turn the mood into a testable objective plus constraints, measurable and time-bound, and fix the one phrase still left vague.
+   - From *"make delivery better"* to *"minimize total route time so every van is back by 18:00, no missed windows."*
+5. [**Initial business case:**]{style="color:#e69138"} weigh benefit (business, societal, analytical), cost, and the baseline to beat, and name the unintended consequences, direct and indirect.
+   - ~15% less overtime ≈ €120k/yr (assumed); cost = build + solver + retraining; baseline = manual, 45 min/morning; side effect: daily route churn annoys drivers.
+6. [**Sponsor agreement:**]{style="color:#e69138"} get a signature on the problem, the target, the budget, and what is explicitly in and out of scope.
+   - Ops director signs the one-sentence problem and 18:00 target; same-day re-routing is out of scope; dispatchers *pilot* before it is mandatory.
+
+## Domain II · Analytics Problem Framing {background-image="assets/bg_iaf_02_analytics_framing.png" background-size="cover"}
+
+[**Translate the business question into a measurable analytics problem.**]{style="color:#e69138"}
+
+1. [**Reformulate as an analytics problem:**]{style="color:#e69138"} objective plus constraints, and its analytics type (descriptive, predictive, prescriptive).
+   - "Assign each stop to a van, order stops to minimize drive time, within capacity and time windows."
+2. [**Drivers, inputs, outputs:**]{style="color:#e69138"} classify each quantity: input, output, both, or neither.
+   - Inputs: locations, service times, capacity, traffic. Output: an ordered stop list per van.
+3. [**State assumptions:**]{style="color:#e69138"} explicit and implicit, and how you'd check each held.
+   - Service time fixed; traffic average for the hour; every parcel fits; no breakdowns.
+4. [**Primary measures of success:**]{style="color:#e69138"} split the business KPI from the model objective, which is often only a *proxy* and can diverge from it.
+   - Business KPI: overtime past 18:00, on-time %. Model objective: total drive time.
+
+## Domain II · Analytics Problem Framing, continued {background-image="assets/bg_iaf_02_analytics_framing.png" background-size="cover"}
+
+[**Set the bar, and get buy-in before building.**]{style="color:#e69138"}
+
+5. [**Baseline of the current state:**]{style="color:#e69138"} measure today so improvement is provable.
+   - Replay last month's manual routes: 6.2 overtime h/van/week, 91% on-time. That is the number to beat.
+6. [**Risks and mitigations:**]{style="color:#e69138"} anticipate what could sink it and how you'd blunt each: data limits, model bias, ethical risk, over-reliance on generative AI.
+   - Dispatchers reject "weird" routes → human-in-the-loop + explanations. Bad addresses → validate geocoding; a model fit to old routes can bake in old bias.
+7. [**Sponsor agreement on the framing:**]{style="color:#e69138"} confirm this framing still delivers the promised value, and align every RACI party on it before any build.
+   - Ops director agrees success is overtime cut against the replayed baseline, not "faster" in the abstract.
+
+## Domain III · Data {background-image="assets/bg_iaf_03_data.png" background-size="cover"}
+
+[**Get the right data, and make it trustworthy.**]{style="color:#e69138"}
+
+1. [**Identify and prioritize data needs:**]{style="color:#e69138"} rank them, and flag sensitive fields.
+   - Must-have: addresses, time windows, capacity. Nice-to-have: live traffic.
+2. [**Identify and analyze sources:**]{style="color:#e69138"} where each field lives, in what form and what condition, and who owns it (owner, steward, custodian).
+   - Orders in the order system; traces from telematics; capacities in a spreadsheet.
+3. [**Data management plan:**]{style="color:#e69138"} refresh, storage, access, and security, sized to the four Vs (volume, velocity, variety, veracity).
+   - Nightly export of tomorrow's stops; addresses geocoded once and cached.
+4. [**Acquire data:**]{style="color:#e69138"} a real extract, with lineage and version control.
+   - Pull last month's orders and traces; build on real routes, not toy data.
+
+## Domain III · Data, continued {background-image="assets/bg_iaf_03_data.png" background-size="cover"}
+
+[**Clean it, understand it, document it, and loop back.**]{style="color:#e69138"}
+
+5. [**Clean, harmonize, validate:**]{style="color:#e69138"} the standard defects: missing, duplicate, mistyped, corrupt, default, out-of-range.
+   - Geocode addresses, drop duplicates, join each stop to its van, flag the 3% with no location.
+6. [**Assess quality and relationships:**]{style="color:#e69138"} score quality (accuracy, completeness, consistency, timeliness, validity, uniqueness, outliers), then profile structure.
+   - Service time varies 2× by parcel type; "traffic" is really the hour of day.
+7. [**Document and report findings:**]{style="color:#e69138"} record tables, fields, quality, assumptions.
+   - A data doc: every table and field type, the 3% geocoding gap, and how it was handled.
+8. [**Validate and update the problem statements:**]{style="color:#e69138"} loop back if the data changes what's feasible.
+   - No reliable time windows → soften *"no missed windows"* to *"minimize total lateness."*
+
+## Domain IV · Methodology (Approach) Framing {background-image="assets/bg_iaf_04_methodology.png" background-size="cover"}
+
+[**Choose the method and the stack that fit the problem and the data.**]{style="color:#e69138"}
+
+1. [**Determine candidate methods:**]{style="color:#e69138"} across the analytics types (descriptive, predictive, prescriptive); routing is prescriptive.
+   - A capacitated vehicle routing problem with time windows: an exact IP, or metaheuristics.
+2. [**Evaluate and select, given data and resources:**]{style="color:#e69138"} fit to the data, the time, and the team's skills; weigh technical vs business cost, benefit, risk.
+   - 300 stops nightly in minutes → a metaheuristic; keep the exact model for tiny depots.
+3. [**Understand the solution architecture:**]{style="color:#e69138"} sketch how data flows in and out.
+   - Nightly batch: export tomorrow's stops → solve → push routes to the driver app by 05:00.
+4. [**Evaluate and select the technology stack:**]{style="color:#e69138"} pick tools and solver: cloud or on-prem, open-source or proprietary; a spreadsheet can be right, not here.
+   - Python with a routing solver; the order database for stops; a small service feeding the app.
+
+## Domain V · Analytics / Model Development {background-image="assets/bg_iaf_05_model_dev.png" background-size="cover"}
+
+[**Build the model, and prove it works.**]{style="color:#e69138"}
+
+1. [**Design the model structure:**]{style="color:#e69138"} variables, objective, constraints on paper first; a prescriptive model needs decision variables, constraints, an objective, a predictive one dependent and independent variables.
+   - Vars: which van visits each stop, in what order. Objective: total drive time (proxy) plus a lateness penalty. Constraint: van capacity. Overtime past 18:00: a KPI, not a hard cap.
+2. [**Build one or more models:**]{style="color:#e69138"} implement it, maybe as competing variants, and check nothing is missing or double-counted in the formulation.
+   - A base router; a variant that may defer a stop to tomorrow when the fleet is overloaded.
+3. [**Run, verify, evaluate:**]{style="color:#e69138"} check it solves in time, the routes make sense, and no biased or unethical outcome slipped in.
+   - Solves in 90 s for 300 stops; total drive time down 12% versus the baseline on last month's data.
+
+## Domain V · Model Development, continued {background-image="assets/bg_iaf_05_model_dev.png" background-size="cover"}
+
+[**Tune it to reality, connect it, and write it down.**]{style="color:#e69138"}
+
+4. [**Calibrate with client input:**]{style="color:#e69138"} tune parameters so output matches reality; trace each client complaint to a data or model cause.
+   - Dispatchers: *"15 min at this hospital, not 5."* Fix per-stop service times, then re-solve.
+5. [**Integrate multiple models if needed:**]{style="color:#e69138"} connect models when one feeds another, and resolve their conflicts and synergies.
+   - A demand forecast picks tomorrow's likely stops; the router plans them. Two models, one pipeline.
+6. [**Document model findings:**]{style="color:#e69138"} write the math, assumptions, limitations, and constraints, in plain terms for a non-technical audience.
+   - A model doc: objective, every constraint, the constant-service-time assumption, and what it cannot do.
+
+## Domain VI · Deployment {background-image="assets/bg_iaf_06_deployment.png" background-size="cover"}
+
+[**Ship it into the business, not just onto a server.**]{style="color:#e69138"}
+
+1. [**Business validation:**]{style="color:#e69138"} confirm with the business that it solves the real problem, not a proxy, and surface any ethical risk before it ships.
+   - Run a week of real days in parallel; dispatchers compare the model's routes to their own.
+2. [**Validation report:**]{style="color:#e69138"} write up what validation showed, the gaps included, with a plain-language summary for the sponsor.
+   - Report: overtime down 14% on the pilot week; two depots still need manual overrides.
+3. [**Sponsor agreement to proceed:**]{style="color:#e69138"} get the green light to deploy.
+   - Ops director signs off on rollout to the pilot depot after seeing the validation numbers.
+
+## Domain VI · Deployment, continued {background-image="assets/bg_iaf_06_deployment.png" background-size="cover"}
+
+[**Specify it, stand it up, and verify it on live data.**]{style="color:#e69138"}
+
+4. [**Requirements for the deployed solution:**]{style="color:#e69138"} model, usability, system, and business needs, documented so it can be reused if the business changes.
+   - Routes ready by 05:00; a dispatcher can lock or edit a stop; a fallback if the solve fails.
+5. [**Support implementation and testing:**]{style="color:#e69138"} help stand up, load-test, and harden production, and name who owns it once live.
+   - Integrate with the driver app; load-test the nightly run; test the "solver failed" fallback path.
+6. [**Validate production data flows:**]{style="color:#e69138"} verify it works on live data end to end, and pin down which sources must stay synchronized.
+   - Watch the first live weeks; confirm the nightly export still matches the format the model assumes.
+
+## Domain VII · Analytics Solution Lifecycle Management {background-image="assets/bg_iaf_07_lifecycle.png" background-size="cover"}
+
+[**Keep the benefit alive after everyone moves on.**]{style="color:#e69138"}
+
+1. [**Track performance:**]{style="color:#e69138"} monitor the KPI over time; define what "acceptable" is and what could drift it out of range.
+   - A dashboard of weekly overtime and on-time %, with an alert if overtime creeps back up.
+2. [**Recalibrate and maintain:**]{style="color:#e69138"} retune as the world drifts, weighing the opportunity and the risk of each change before you ship it.
+   - A new depot and two more vans next quarter: re-tune capacities and service times.
+3. [**Support training:**]{style="color:#e69138"} train three audiences, analytics, IT, and business users, so each can run it.
+   - Onboard new dispatchers; document how to override, and when to trust the routes.
+
+## Domain VII · Lifecycle Management, continued {background-image="assets/bg_iaf_07_lifecycle.png" background-size="cover"}
+
+[**Re-earn the business case, and stay hand-off-ready.**]{style="color:#e69138"}
+
+4. [**Validate the business case over time:**]{style="color:#e69138"} confirm it still delivers, and isolate the benefit actually attributable to the solution.
+   - Six months on, is overtime still down €120k/yr, or has the benefit quietly eroded?
+5. [**Analyze side effects:**]{style="color:#e69138"} watch for unintended consequences that surface only over time, including an ethical issue not visible in the data.
+   - Drivers dislike routes that change daily → keep routes stable where the cost difference is small.
+6. [**Keep documentation maintained:**]{style="color:#e69138"} stay hand-off-ready as staff turn over, and record which lifecycle activities to monitor.
+   - No obfuscated code, model math kept current, so the next team can take it over.
+
+## The same seven stages, in the wild
+
+[**Every large deployment is a full walk of the seven stages, not a clever model in isolation.**]{style="color:#e69138"}
+
+- [**UPS ORION**]{style="color:#e69138"} (delivery routing): ~3 years of field testing, hundreds of deployment staff, tens of thousands of drivers before it paid off. [@holland2017orion]
+- [**HP print forecasting**]{style="color:#e69138"} (18,000+ products, 170+ countries): a machine-learning model living *inside* a human-in-the-loop workflow, not replacing it. [@harshvardhan2025hp]
+- [**U.S. Census MOJO**]{style="color:#e69138"} (2020 nonresponse follow-up): ML plus optimization replaced a paper process; now extending to 90+ surveys. [@adams2023census]
+
+::: {.platypus-info}
+In each, the win came from framing, data, deployment, and lifecycle; the model was a minority of the effort. The framework is really a **handoff-control system**: it stops work dying in the seams between sponsor, experts, analysts, data, IT, and operators.
+:::
+

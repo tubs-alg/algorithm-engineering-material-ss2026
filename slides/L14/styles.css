@@ -1,0 +1,164 @@
+/* Styles for L13 — copied from the course deck conventions (L01/L10):
+   platypus callouts, source notes, and small layout helpers. */
+
+.border {
+  border: 1px solid #dee2e6;
+}
+
+.smaller {
+  font-size: 0.85em;
+}
+
+/* Dense reference slide: keep a near-normal font but pull the list line
+   spacing in tight, so a many-item checklist fits without shrinking the type.
+   (The default list gap is sized for normal prose and dominates the height.) */
+.dense {
+  font-size: 0.95em;
+}
+.dense ul {
+  margin: 0.1em 0;
+}
+.dense li {
+  line-height: 1.08;
+  margin: 0 0 0.02em 0;
+}
+
+.source-note {
+  font-size: 0.55em;
+  color: #999;
+  margin-top: 0.5em;
+}
+
+figcaption {
+  text-align: center !important;
+}
+
+.highlight-box {
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 3px solid #f39c12;
+  padding: 0.5em 0.8em;
+  margin-top: 0.5em;
+  border-radius: 4px;
+}
+
+.center-title h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+}
+
+/* Platypus callout boxes — mirrors cpsat-primer style for RevealJS.
+   Usage: ::: {.platypus-tip} / .platypus-warning / .platypus-info / .platypus-question / .platypus-confucypus
+   The platypus appears on the left via ::before background-image. */
+/* Grid layout (not flex): every paragraph in the body would otherwise become
+   a separate flex item and render side-by-side. Grid pins the platypus image
+   to its column and lets content paragraphs stack as rows in the other column. */
+.platypus-tip,
+.platypus-warning,
+.platypus-info,
+.platypus-question,
+.platypus-confucypus,
+.platypus-book,
+.platypus-video,
+.callout-warning {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 1em;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 0.7em 1em;
+  margin: 0.5em 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.platypus-tip::before,
+.platypus-warning::before,
+.platypus-info::before,
+.platypus-question::before,
+.platypus-confucypus::before,
+.platypus-book::before,
+.platypus-video::before,
+.callout-warning::before {
+  content: "";
+  width: 90px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  grid-column: 1;
+  grid-row: 1 / span 100;
+  align-self: center;
+}
+
+/* Per-variant aspect ratios match each image's native proportions so
+   the reserved box hugs the platypus instead of padding it. */
+.platypus-tip::before { aspect-ratio: 433 / 746; }
+.platypus-warning::before,
+.callout-warning::before { aspect-ratio: 454 / 770; }
+.platypus-info::before { aspect-ratio: 427 / 420; }
+.platypus-question::before { aspect-ratio: 731 / 943; }
+/* Confucypus is drawn a touch larger so the sage reads at a glance. */
+.platypus-confucypus::before { aspect-ratio: 856 / 1066; width: 110px; }
+
+/* Book/Video variants: platypus on the right via ::after */
+.platypus-book,
+.platypus-video {
+  grid-template-columns: 1fr auto;
+}
+
+.platypus-book::after,
+.platypus-video::after {
+  grid-column: 2;
+  grid-row: 1 / span 100;
+  align-self: center;
+}
+
+.platypus-tip { background: rgba(80, 160, 80, 0.12); border-color: #5a9e5a; }
+.platypus-tip::before { background-image: url('assets/idea_platypus.webp'); }
+
+.platypus-warning,
+.callout-warning { background: rgba(200, 120, 40, 0.12); border-color: #c87828; }
+.platypus-warning::before,
+.callout-warning::before { background-image: url('assets/warning_platypus.webp'); }
+
+.callout-warning .callout-title { display: none; }
+
+.platypus-info { background: rgba(60, 140, 200, 0.12); border-color: #3c8cc8; }
+.platypus-info::before { background-image: url('assets/info_platypus.webp'); }
+
+.platypus-question { background: rgba(180, 140, 60, 0.12); border-color: #b48c3c; }
+.platypus-question::before { background-image: url('assets/platypus-thinking.png'); }
+
+.platypus-confucypus { background: rgba(140, 110, 80, 0.12); border-color: #8c6e50; font-style: italic; }
+.platypus-confucypus::before { background-image: url('assets/confucypus.png'); }
+
+.platypus-book { background: rgba(140, 100, 200, 0.12); border-color: #8c64c8; }
+.platypus-book::before { display: none; }
+.platypus-book::after {
+  content: "";
+  flex-shrink: 0;
+  width: 120px;
+  aspect-ratio: 422 / 427;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('assets/book_platypus.webp');
+}
+
+.platypus-video { background: rgba(200, 60, 80, 0.12); border-color: #c83c50; }
+.platypus-video::before { display: none; }
+.platypus-video::after {
+  content: "";
+  flex-shrink: 0;
+  width: 120px;
+  aspect-ratio: 454 / 439;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('assets/tv_platypus.webp');
+}
+
